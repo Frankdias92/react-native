@@ -7,7 +7,7 @@ import { ThemeProvider } from '@react-navigation/native'
 export default function App() {
     
     return (
-        <View >
+        <View className='flex flex-1' style={{backgroundColor: '#262424'}}>
             <StatusBar barStyle={'light-content'} 
                 backgroundColor={'transparent'}
                 translucent
