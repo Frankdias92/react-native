@@ -6,7 +6,7 @@ export function HeaderHome() {
     const profile = require('../../assets/images/profile.png')
 
     return (
-            <View className='flex-1 flex-row justify-between'>
+            <View className='flex w-full flex-row justify-between'>
                     <Image source={logo} className='w-20 h-9'/>
 
                 <View className='flex' style={{backgroundColor: 'green', borderRadius: 50}}>

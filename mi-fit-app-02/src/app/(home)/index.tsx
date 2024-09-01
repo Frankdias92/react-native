@@ -7,7 +7,7 @@ export function Home() {
 
     return (
         <View className="flex flex-1 flex-col justify-start gap-4 p-4" style={{backgroundColor: '#262424'}}>
-            <View className="flex">
+            <View className="flex flex-row justify-between">
                 <HeaderHome />
             </View>
             <Button title="Navegar"
