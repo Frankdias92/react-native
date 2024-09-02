@@ -4,28 +4,30 @@ import {
    Roboto_400Regular,
     Roboto_700Bold 
   } from '@expo-google-fonts/roboto';
-
+import { GluestackUIProvider } from '@gluestack-ui/themed';
 
 
 export default function App() {
   const [fontsLoaded] = useFonts({Roboto_400Regular, Roboto_700Bold})
   return (
-    <View style={styles.container}>
-      <StatusBar 
-        barStyle={'light-content'}
-        backgroundColor={'transparent'}
-        translucent
-      />
-      
-      {fontsLoaded ? (
-          <Text style={styles.textTitle}>
-            New app!
-          </Text> 
-        )
-        : ( 
-          <View /> 
-        )}
-    </View>
+      <GluestackUIProvider>
+      <View style={styles.container}>
+        <StatusBar 
+          barStyle={'light-content'}
+          backgroundColor={'transparent'}
+          translucent
+        />
+        
+        {fontsLoaded ? (
+            <Text style={styles.textTitle}>
+              New app!
+            </Text> 
+          )
+          : ( 
+            <View /> 
+          )}
+      </View>
+    </GluestackUIProvider>
   );
 }
 
