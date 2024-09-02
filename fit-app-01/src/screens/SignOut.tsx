@@ -6,8 +6,11 @@ import Logo from '@assets/logo.svg'
 
 import { Input } from "@components/imput";
 import { Button } from "@components/Button";
+import { useNavigation } from "@react-navigation/native";
 
 export function SignOut() {
+    const navigator = useNavigation()
+    
     return (
         <ScrollView contentContainerStyle={{ flexGrow: 1 }} 
             showsVerticalScrollIndicator={false}
@@ -49,7 +52,11 @@ export function SignOut() {
                     </Center>
 
                     <Center flex={1} justifyContent="flex-end" mb={"$10"}>
-                        <Button title="Already have account?" variant="outline"/>
+                        <Button 
+                            title="Already have account?" 
+                            variant="outline"
+                            onPress={() => navigator.goBack()}
+                        />
                     </Center>
                     
                 </VStack>
