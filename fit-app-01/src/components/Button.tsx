@@ -9,7 +9,7 @@ type ButtonProps = ComponentProps<typeof GluestackButton> & {
 
 export function Button({ title, isLoading = false, variant = 'solid', ...rest }: ButtonProps) {
     return (
-        <GluestackButton 
+        <GluestackButton
             w={"$full"}
             h={"$14"}
             bg={variant === "outline" ? "transparent" : "$green700"}

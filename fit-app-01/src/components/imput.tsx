@@ -5,7 +5,7 @@ type InputProps = ComponentProps<typeof InputField>
 
 export function Input({...rest}: InputProps) {
     return (
-        <GluestackInput bg="$trueGray700" h={"$14"} borderWidth={"$0"} borderRadius={"$md"}>
+        <GluestackInput bg="$trueGray700" w={"$full"} h={"$14"} borderWidth={"$0"} borderRadius={"$md"}>
             <InputField 
                 color="$white"
                 fontFamily="$body" 
