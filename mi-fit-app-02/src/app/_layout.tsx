@@ -6,7 +6,11 @@ type LayoutProps = {
     children: ReactNode
 }
 
-export default function Layout({children}: LayoutProps) {
+export default function RootLayout({
+    children,
+  }: Readonly<{
+    children: React.ReactNode
+  }>) {
     return (
         <View className="flex-1">
             <Slot />

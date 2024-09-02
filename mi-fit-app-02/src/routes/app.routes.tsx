@@ -15,7 +15,7 @@ export function AppRoutes() {
             />
 
             <Screen
-                name='homeMeal'
+                name='details'
                 component={HomeMeal}
             />
         </Navigator>

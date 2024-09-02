@@ -1,6 +1,7 @@
 import { Button, Text, View } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import { HeaderHome } from "@/src/components/home/headerHome";
+import { HeaderHome } from "@/components/home/headerHome";
+import { ButtonCreateNew } from "@/components/home/btnCreateNew";
 
 export function Home() {
     const navigation = useNavigation()
@@ -10,9 +11,7 @@ export function Home() {
             <View className="flex flex-row justify-between">
                 <HeaderHome />
             </View>
-            <Button title="Navegar"
-                onPress={() => navigation.navigate('homeMeal')}
-            />
+            <ButtonCreateNew title="Nova refeição" page='details'/>
         </View>
     )
 }

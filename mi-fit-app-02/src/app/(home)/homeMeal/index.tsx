@@ -7,7 +7,7 @@ export function HomeMeal() {
     return (
         <View>
             <Text>Meal Home</Text>
-            <Button title="Navegar"
+            <Button title="Return to Home"
                 onPress={() => navigation.navigate('home')}
             />
         </View>
