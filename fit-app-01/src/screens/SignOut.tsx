@@ -13,7 +13,7 @@ export function SignOut() {
             showsVerticalScrollIndicator={false}
         >
 
-            <VStack flex={1} bg="$trueGray700">
+            <VStack flex={1} >
                 <Image 
                     source={BackgraoundImg}
                     defaultSource={BackgraoundImg}

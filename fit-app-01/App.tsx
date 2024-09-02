@@ -1,14 +1,15 @@
-import { StatusBar, StyleSheet, Text, View } from 'react-native';
+import { StatusBar } from 'react-native';
 import { 
     useFonts,
    Roboto_400Regular,
     Roboto_700Bold 
   } from '@expo-google-fonts/roboto';
+  
 import { GluestackUIProvider } from '@gluestack-ui/themed';
 import { config } from './config/gluestack-ui.config';
 
+import { Routes } from '@routes/index';
 import { Loading } from '@components/Loading';
-import { SignOut } from '@screens/SignOut';
 
 export default function App() {
   const [fontsLoaded] = useFonts({Roboto_400Regular, Roboto_700Bold})
@@ -20,7 +21,7 @@ export default function App() {
             translucent
           />
           
-          {fontsLoaded ?  <SignOut /> :  <Loading /> }
+          {fontsLoaded ?  <Routes /> :  <Loading /> }
     </GluestackUIProvider>
   );
 }
