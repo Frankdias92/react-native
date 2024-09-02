@@ -5,12 +5,14 @@ import {
     Roboto_700Bold 
   } from '@expo-google-fonts/roboto';
 import { GluestackUIProvider } from '@gluestack-ui/themed';
+import { config } from './config/gluestack-ui.config';
+import { Loading } from '@components/Loading';
 
 
 export default function App() {
   const [fontsLoaded] = useFonts({Roboto_400Regular, Roboto_700Bold})
   return (
-      <GluestackUIProvider>
+      <GluestackUIProvider config={config}>
       <View style={styles.container}>
         <StatusBar 
           barStyle={'light-content'}
@@ -24,7 +26,7 @@ export default function App() {
             </Text> 
           )
           : ( 
-            <View /> 
+            <Loading />
           )}
       </View>
     </GluestackUIProvider>
