@@ -7,7 +7,7 @@ import ProfileSvg from '@assets/profile.svg'
 
 import { Home } from "@screens/Home";
 import { Exercise } from "@screens/Exercise";
-import { Profile } from "@screens/History copy";
+import { Profile } from "@screens/Profile";
 import { History } from "@screens/History";
 import { Platform } from "react-native";
 
