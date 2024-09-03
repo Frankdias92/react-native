@@ -13,8 +13,8 @@ export function HistoryCart() {
             alignItems="center"
             justifyContent="space-between"
         >
-            <VStack mr={"$5"}>
-                <Heading color="$white" fontSize={"$md"} textTransform="capitalize" fontFamily="$heading">
+            <VStack flex={1} mr={"$5"}>
+                <Heading color="$white" fontSize={"$md"} textTransform="capitalize" fontFamily="$heading" numberOfLines={1}>
                     Deadlift
                 </Heading>
 

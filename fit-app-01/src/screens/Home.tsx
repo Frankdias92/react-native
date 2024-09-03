@@ -7,6 +7,9 @@ import { Group } from "@components/home/Group";
 import { ExerciceCart } from "@components/ExerciseCart";
 import { FlatList } from "react-native";
 
+import { useNavigation } from "@react-navigation/native";
+import { AppNavigatorRoutesProps } from "@routes/app.routes";
+
 
 export function Home() {
     const [exercices, setExercices] = useState([
@@ -17,9 +20,11 @@ export function Home() {
     ])
     const [groups, setGroups] = useState(['Back', 'Legs', 'Arms', 'Biceps'])
     const [groupSelected, setGroupSelected] = useState('biceps')
+
+    const navitagation = useNavigation<AppNavigatorRoutesProps>()
     
     return (
-        <VStack>
+        <VStack flex={1}>
             <HomeHeader />
 
             <FlatList 
@@ -51,7 +56,7 @@ export function Home() {
                 <FlatList 
                     data={exercices}
                     keyExtractor={(item) => item}   
-                    renderItem={(() => <ExerciceCart />  )}
+                    renderItem={(() => <ExerciceCart onPress={() => navitagation.navigate('exercise')}/>  )}
                     showsVerticalScrollIndicator={false}
                     contentContainerStyle={{ paddingBottom: 20}}
                 />
