@@ -48,7 +48,7 @@ export function SignUp() {
                     position="absolute"
                 />
 
-                <VStack flex={1} px={"$8"} >
+                <VStack flex={1} px={"$8"} pb={"$10"}>
                     <Center my={"$16"}>
                         <Logo />
                         <Text color="$trueGray100" fontSize={"$sm"}>
@@ -56,30 +56,21 @@ export function SignUp() {
                         </Text>
                     </Center>
 
-                    <Center gap={"$4"} w={"$full"}>
-                        <Heading color="$trueGray100">Create your account</Heading>
+                    <Center gap={"$3"} w={"$full"}>
+                        <Heading color="$trueGray100" mb={"$2"}>Create your account</Heading>
 
                         <Controller 
                             control={control}
                             name="name"
-                            rules={{
-                                required: 'Insert name',
-                                pattern: {
-                                    value:/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                                    message: 'name invalid'
-                                  }
-                            }}
                             render={({ field: {onChange, value} }) => (
                                 <Input
                                     placeholder="Name"
                                     onChangeText={onChange}
                                     value={value}
+                                    errorMessage={errors.name?.message}
                                 />
                             )}
                         />
-                        {errors.name?.message && (
-                            <Text color="$white">{errors.name.message}</Text>
-                        )}
 
 
                         <Controller 
@@ -99,22 +90,20 @@ export function SignUp() {
                                     autoCapitalize="none"
                                     onChangeText={onChange}
                                     value={value}
+                                    errorMessage={errors.email?.message}
                                 />
                             )}
                         />
-                        {errors.email?.message && (
-                            <Text color="$white">{errors.email.message}</Text>
-                        )}
 
                         <Controller 
                             control={control}
                             name="password"
                             rules={{
                                 required: 'Insert your password',
-                                pattern: {
-                                    value:/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                                    message: 'type of password is invalid'
-                                  }
+                                // pattern: {
+                                //     value:/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                                //     message: 'type of password is invalid'
+                                //   }
                             }}
                             render={({ field: {onChange, value} }) => (
                                 <Input 
@@ -122,22 +111,20 @@ export function SignUp() {
                                     secureTextEntry
                                     onChangeText={onChange}
                                     value={value}
+                                    errorMessage={errors.password?.message}
                                 />
                             )}
                         />
-                        {errors.password?.message && (
-                            <Text color="$white">{errors.password.message}</Text>
-                        )}
 
                         <Controller 
                             control={control}
                             name="password_confirm"
                             rules={{
                                 required: 'confirm you password',
-                                pattern: {
-                                    value:/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                                    message: 'type of password is invalid'
-                                  }
+                                // pattern: {
+                                //     value:/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                                //     message: 'type of password is invalid'
+                                //   }
                             }}
                             render={({ field: {onChange, value} }) => (
                                 <Input 
@@ -147,12 +134,10 @@ export function SignUp() {
                                    value={value}
                                    onSubmitEditing={handleSubmit(handleSignUp)}
                                    returnKeyType="send"
+                                   errorMessage={errors.password_confirm?.message}
                                />
                             )}
                         />
-                        {errors.password_confirm?.message && (
-                            <Text color="$white">{errors.password_confirm.message}</Text>
-                        )}
                         
                         <Button 
                             title="Create new account"
@@ -160,7 +145,7 @@ export function SignUp() {
                         />
                     </Center>
 
-                    <Center flex={1} justifyContent="flex-end" mb={"$10"}>
+                    <Center flex={1} justifyContent="flex-end" >
                         <Button 
                             title="Already have account?" 
                             variant="outline"

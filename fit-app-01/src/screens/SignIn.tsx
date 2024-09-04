@@ -39,13 +39,13 @@ export function SignIn() {
                         </Text>
                     </Center>
 
-                    <Center gap={"$10"} w={"$full"}>
-                        <Heading color="$trueGray100">Access your account</Heading>
+                    <Center gap={"$3"} w={"$full"}>
+                        <Heading color="$trueGray100" mb={"$2"}>Access your account</Heading>
                         <Input 
                             placeholder='E-mail' 
                             keyboardType="email-address" 
                             autoCapitalize="none"
-                            />
+                        />
                         <Input 
                             placeholder='Password'
                             secureTextEntry
