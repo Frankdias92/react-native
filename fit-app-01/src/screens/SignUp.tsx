@@ -1,23 +1,35 @@
 import { Center, Heading, Image, ScrollView, Text, VStack } from "@gluestack-ui/themed";
 
-import BackgraoundImg from '@assets/background.png'
-
-import Logo from '@assets/logo.svg'
+import { useNavigation } from "@react-navigation/native";
+import { useForm, Controller } from "react-hook-form";
 
 import { Input } from "@components/imput";
 import { Button } from "@components/Button";
-import { useNavigation } from "@react-navigation/native";
-import { useState } from "react";
-import { useForm, Controller } from "react-hook-form";
+
+import Logo from '@assets/logo.svg'
+import BackgraoundImg from '@assets/background.png'
+
+type FormDataProps = {
+    name: string
+    email: string
+    password: string
+    password_confirm: string
+}
 
 export function SignUp() {
 
     const navigator = useNavigation()
-    const { control } = useForm()
-    
+    const { control, handleSubmit, formState: { errors } } = useForm<FormDataProps>({
+        defaultValues: {
+            // name: 'user',
+            // email: 'user@email.com',
+            // password: 'user123',
+            // password_confirm: 'user123'
+        }
+    })
 
-    function handleSignUp() {
-
+    function handleSignUp({name, email, password, password_confirm}: FormDataProps) {
+        console.log(name)
     }
 
     
@@ -50,6 +62,13 @@ export function SignUp() {
                         <Controller 
                             control={control}
                             name="name"
+                            rules={{
+                                required: 'Insert name',
+                                pattern: {
+                                    value:/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                                    message: 'name invalid'
+                                  }
+                            }}
                             render={({ field: {onChange, value} }) => (
                                 <Input
                                     placeholder="Name"
@@ -58,10 +77,21 @@ export function SignUp() {
                                 />
                             )}
                         />
+                        {errors.name?.message && (
+                            <Text color="$white">{errors.name.message}</Text>
+                        )}
+
 
                         <Controller 
                             control={control}
                             name="email"
+                            rules={{
+                                required: 'Insert email',
+                                pattern: {
+                                    value:/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                                    message: 'E-mail invalid'
+                                  }
+                            }}
                             render={({ field: {onChange, value} }) => (
                                 <Input 
                                     placeholder='E-mail' 
@@ -72,10 +102,20 @@ export function SignUp() {
                                 />
                             )}
                         />
+                        {errors.email?.message && (
+                            <Text color="$white">{errors.email.message}</Text>
+                        )}
 
                         <Controller 
                             control={control}
                             name="password"
+                            rules={{
+                                required: 'Insert your password',
+                                pattern: {
+                                    value:/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                                    message: 'type of password is invalid'
+                                  }
+                            }}
                             render={({ field: {onChange, value} }) => (
                                 <Input 
                                     placeholder='Password'
@@ -85,21 +125,39 @@ export function SignUp() {
                                 />
                             )}
                         />
+                        {errors.password?.message && (
+                            <Text color="$white">{errors.password.message}</Text>
+                        )}
 
                         <Controller 
                             control={control}
-                            name="confirmPasswordl"
+                            name="password_confirm"
+                            rules={{
+                                required: 'confirm you password',
+                                pattern: {
+                                    value:/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                                    message: 'type of password is invalid'
+                                  }
+                            }}
                             render={({ field: {onChange, value} }) => (
                                 <Input 
                                    placeholder='Confirm Password'
                                    secureTextEntry
                                    onChangeText={onChange}
                                    value={value}
+                                   onSubmitEditing={handleSubmit(handleSignUp)}
+                                   returnKeyType="send"
                                />
                             )}
                         />
+                        {errors.password_confirm?.message && (
+                            <Text color="$white">{errors.password_confirm.message}</Text>
+                        )}
                         
-                        <Button title="Create new account"/>
+                        <Button 
+                            title="Create new account"
+                            onPress={handleSubmit(handleSignUp)}
+                        />
                     </Center>
 
                     <Center flex={1} justifyContent="flex-end" mb={"$10"}>
