@@ -13,7 +13,7 @@ export function SignIn() {
     const navigation = useNavigation<AuthNavigatorRoutesProps>()
 
     function handleNewAccount() {
-        navigation.navigate('signOut')
+        navigation.navigate('signUp')
     }
     
     return (

@@ -1,11 +1,11 @@
 import { createNativeStackNavigator, NativeStackNavigationProp } from "@react-navigation/native-stack";
 
 import { SignIn } from "@screens/SignIn";
-import { SignOut } from "@screens/SignOut";
+import { SignUp } from "@screens/SignUp";
 
 type AuthRoutes = {
     signIn: undefined
-    signOut: undefined
+    signUp: undefined
 }
 
 export type AuthNavigatorRoutesProps = NativeStackNavigationProp<AuthRoutes>
@@ -16,7 +16,7 @@ export function AuthRoutes() {
     return (
         <Navigator initialRouteName="signIn" screenOptions={{ headerShown: false }}>
             <Screen name="signIn" component={SignIn} />
-            <Screen name="signOut" component={SignOut} />
+            <Screen name="signUp" component={SignUp} />
         </Navigator>
     )
 }
