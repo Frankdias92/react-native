@@ -1,5 +1,7 @@
 import { Center, Heading, Image, ScrollView, Text, VStack } from "@gluestack-ui/themed";
-
+import { yupResolver } from '@hookform/resolvers/yup'
+import * as yup from 'yup'
+ 
 import { useNavigation } from "@react-navigation/native";
 import { useForm, Controller } from "react-hook-form";
 
@@ -16,17 +18,19 @@ type FormDataProps = {
     password_confirm: string
 }
 
-export function SignUp() {
+const signUpSchema = yup.object({
+    name: yup.string().required('Enter with your name'),
+    email: yup.string().required('Enter with your e-mail').email('E-mail invalid'),
+    password: yup.string().required('Enter with your password'),
+    password_confirm: yup.string().required('Enter with your password')
+})
 
-    const navigator = useNavigation()
+export function SignUp() {
     const { control, handleSubmit, formState: { errors } } = useForm<FormDataProps>({
-        defaultValues: {
-            // name: 'user',
-            // email: 'user@email.com',
-            // password: 'user123',
-            // password_confirm: 'user123'
-        }
+        resolver: yupResolver(signUpSchema)
     })
+    
+    const navigator = useNavigation()
 
     function handleSignUp({name, email, password, password_confirm}: FormDataProps) {
         console.log(name)
@@ -76,13 +80,6 @@ export function SignUp() {
                         <Controller 
                             control={control}
                             name="email"
-                            rules={{
-                                required: 'Insert email',
-                                pattern: {
-                                    value:/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                                    message: 'E-mail invalid'
-                                  }
-                            }}
                             render={({ field: {onChange, value} }) => (
                                 <Input 
                                     placeholder='E-mail' 
@@ -98,13 +95,6 @@ export function SignUp() {
                         <Controller 
                             control={control}
                             name="password"
-                            rules={{
-                                required: 'Insert your password',
-                                // pattern: {
-                                //     value:/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                                //     message: 'type of password is invalid'
-                                //   }
-                            }}
                             render={({ field: {onChange, value} }) => (
                                 <Input 
                                     placeholder='Password'
@@ -119,13 +109,6 @@ export function SignUp() {
                         <Controller 
                             control={control}
                             name="password_confirm"
-                            rules={{
-                                required: 'confirm you password',
-                                // pattern: {
-                                //     value:/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                                //     message: 'type of password is invalid'
-                                //   }
-                            }}
                             render={({ field: {onChange, value} }) => (
                                 <Input 
                                    placeholder='Confirm Password'
