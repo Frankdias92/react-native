@@ -21,8 +21,10 @@ type FormDataProps = {
 const signUpSchema = yup.object({
     name: yup.string().required('Enter with your name'),
     email: yup.string().required('Enter with your e-mail').email('E-mail invalid'),
-    password: yup.string().required('Enter with your password'),
+    password: yup.string().required('Enter with your password')
+        .min(6, 'Your password must have at last 6 digits'),
     password_confirm: yup.string().required('Enter with your password')
+        .oneOf([yup.ref('password'), ""], 'Your password must be iguals, please confirm they are the same.')
 })
 
 export function SignUp() {
