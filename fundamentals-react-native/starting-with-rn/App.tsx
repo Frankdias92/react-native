@@ -6,6 +6,7 @@ import { Center, GluestackUIProvider, Text, VStack } from "@gluestack-ui/themed"
 import { config } from "@gluestack-ui/config";
 
 import { AppRouter } from "@routes/app.routes";
+import { StatusBar } from "react-native";
 
 export default function App() {
   const [fontsloaded] = useFonts({ Roboto_400Regular })
@@ -13,6 +14,11 @@ export default function App() {
   return (
     <NavigationContainer>
       <GluestackUIProvider config={config}>
+        <StatusBar 
+          barStyle={'light-content'}
+          backgroundColor={'transparent'}
+          translucent
+        />
         {fontsloaded ? <AppRouter /> : <Text>Loading...</Text>}
       </GluestackUIProvider>
     </NavigationContainer>

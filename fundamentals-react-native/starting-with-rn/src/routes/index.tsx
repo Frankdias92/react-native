@@ -1,12 +1,19 @@
-import { NavigationContainer } from '@react-navigation/native' 
+import { DefaultTheme, NavigationContainer } from '@react-navigation/native' 
+
+import { gluestackUIConfig } from '@gluestack-ui/config'
+import { Box } from '@gluestack-ui/themed'
 
 import { AppRouter } from './app.routes'
-import { Text } from 'react-native'
 
 export function Routes() {
+    const theme = DefaultTheme
+    theme.colors.background = gluestackUIConfig.tokens.colors.trueGray700
+    
     return (
-        <NavigationContainer>
-            <AppRouter />
-        </NavigationContainer>
+        <Box flex={1} bg='$trueGray700'>
+            <NavigationContainer theme={theme}>
+                <AppRouter />
+            </NavigationContainer>
+        </Box>
     )
 }
