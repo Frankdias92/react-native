@@ -26,10 +26,18 @@ export function Main() {
         setData((prevData) => [...prevData, { task: newTask }])
         setNewTask('')
     }
+
+    const handleDeleteTask = (value: string) => {
+        setData((prevData) => prevData.filter((item) => item.task !== value))
+    }
     
     return (
         <Center>
-            <ButtonComponent onChangeText={(e) => setNewTask(e)} onClick={handleAddTask}/>
+            <ButtonComponent 
+                value={newTask}
+                onChangeText={(e) => setNewTask(e)} 
+                onClick={handleAddTask}
+            />
 
             <HStack 
                 w={"$full"}  
@@ -47,7 +55,7 @@ export function Main() {
                             <FlatList 
                                 data={data}
                                 keyExtractor={(item) => item.task}
-                                renderItem={( {item} ) => <ShowTasks task={item.task}/> }
+                                renderItem={( {item} ) => <ShowTasks task={item.task} onDelete={() => handleDeleteTask(item.task)}/> }
                             />
                         )
                     : (
