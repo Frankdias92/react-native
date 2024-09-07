@@ -10,7 +10,7 @@ export function Routes() {
     theme.colors.background = gluestackUIConfig.tokens.colors.trueGray700
     
     return (
-        <Box flex={1} bg='$trueGray700'>
+        <Box flex={1} bg='$secondary800'>
             <NavigationContainer theme={theme}>
                 <AppRouter />
             </NavigationContainer>

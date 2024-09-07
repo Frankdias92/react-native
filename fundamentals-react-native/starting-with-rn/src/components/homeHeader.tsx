@@ -5,7 +5,7 @@ import { Text } from "react-native";
 export function HomeHeader() {
 
     return (
-        <Center sx={{ justifyContent: "flex-start", backgroundColor: "$trueGray800", height: 173 }}>
+        <Center sx={{ justifyContent: "flex-start", backgroundColor: "$secondary950", height: 173 }}>
             <HStack sx={{ alignContent: "center", height: "auto", alignItems: "center", gap: 4, m: "auto" }}>
                 <Icon as={HandMetal} className="text-red-500" size="xl" color="$trueGray100"/>
                 <Text className=" text-gray-100 text-2xl font-bold">

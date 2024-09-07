@@ -14,7 +14,7 @@ export function Home() {
             contentContainerStyle={{ flexGrow: 1 }}
             showsVerticalScrollIndicator={false}
         >
-            <VStack flex={1} bgColor="$trueGray700">
+            <VStack flex={1} bgColor="$secondary800">
                 <HomeHeader />
                 <Center flex={1} justifyContent="flex-start" px={"$8"}>
                     <Main />

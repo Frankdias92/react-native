@@ -24,7 +24,7 @@ export function ButtonComponent({ isInvalid, onClick, ...rest }: ButtonProps) {
                     <InputField 
                         px={"$4"}
                         color="$trueGray100"
-                        backgroundColor="$trueGray600"
+                        backgroundColor="$secondary700"
                         fontFamily="$body" 
                         // borderRadius={"$md"}
                         placeholderTextColor={"$trueGray400"}
