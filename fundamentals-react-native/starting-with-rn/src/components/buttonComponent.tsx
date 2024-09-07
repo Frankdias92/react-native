@@ -4,9 +4,10 @@ import { ComponentProps } from "react";
 
 type ButtonProps = ComponentProps<typeof InputField> & {
     isInvalid?: boolean
+    onClick: () => void
 }
 
-export function ButtonComponent({ isInvalid, ...rest }: ButtonProps) {
+export function ButtonComponent({ isInvalid, onClick, ...rest }: ButtonProps) {
     return (
         <VStack translateY={-35} >
             <HStack w={"$full"} px={"$8"} gap={"$1"} h={"$12"}>
@@ -31,7 +32,7 @@ export function ButtonComponent({ isInvalid, ...rest }: ButtonProps) {
                     />
                 </GluestackInput>
                 
-                <Button  height={"$12"} bgColor="$cyan400">
+                <Button  height={"$12"} bgColor="$cyan400" onPress={onClick}>
                     <Icon as={PlusCircle} color="$trueGray100" />
                 </Button>
             </HStack>

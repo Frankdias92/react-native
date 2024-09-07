@@ -1,13 +1,14 @@
 import { Center, HStack, Icon, VStack, Text} from "@gluestack-ui/themed";
 import { Check, Circle, CircleCheck, Trash2 } from "lucide-react-native";
 import { useState } from "react";
-import { View,  } from "react-native";
+import { TouchableOpacity, View,  } from "react-native";
 
 interface ShowTasksProps {
-    task: string[]
+    task: string
+    onDelete?: () => void
 }
 
-export function ShowTasks({ task }: ShowTasksProps) {
+export function ShowTasks({ task, onDelete, ...rest }: ShowTasksProps) {
     const [isChecket, setIsChecket] = useState(false)
     
     return (
@@ -28,7 +29,9 @@ export function ShowTasks({ task }: ShowTasksProps) {
                 <Text flex={1} numberOfLines={2}>
                     {task}
                 </Text>
-                <Icon as={Trash2} />                    
+                <TouchableOpacity onPress={onDelete}>
+                    <Icon as={Trash2} />                    
+                </TouchableOpacity>
         </HStack>
     )
 }

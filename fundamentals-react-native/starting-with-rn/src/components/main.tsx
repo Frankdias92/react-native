@@ -7,16 +7,29 @@ import { ClipboardPenLine, View } from "lucide-react-native";
 import { gluestackUIConfig } from "@gluestack-ui/config";
 import { FlatList } from "react-native";
 
+interface TasksProps {
+    task: string
+}
 
 export function Main() {
-    const [tasks, setTask] = useState<string[]>([])
+    const [data, setData] = useState<TasksProps[]>([])
+    const [newTask, setNewTask] = useState<string>('')
 
     const { tokens } = gluestackUIConfig
     const iconSize = tokens.fontSizes["9xl"]
+
+    const handleAddTask = () => {
+        if (newTask.trim() === '') {
+            return
+        }
+    
+        setData((prevData) => [...prevData, { task: newTask }])
+        setNewTask('')
+    }
     
     return (
         <Center>
-            <ButtonComponent />
+            <ButtonComponent onChangeText={(e) => setNewTask(e)} onClick={handleAddTask}/>
 
             <HStack 
                 w={"$full"}  
@@ -29,14 +42,13 @@ export function Main() {
             </HStack>
 
             <VStack flex={1} w={"$full"} mx={"$8"}>
-                {tasks 
+                {data.length >= 1 
                     ? (
                             <FlatList 
-                                data={tasks}
-                                keyExtractor={(item) => item}
-                                renderItem={() => <ShowTasks task={tasks}/> }
+                                data={data}
+                                keyExtractor={(item) => item.task}
+                                renderItem={( {item} ) => <ShowTasks task={item.task}/> }
                             />
-                            // 
                         )
                     : (
                         <Center mt={"$10"}>
