@@ -1,15 +1,16 @@
-import { Center, HStack, Icon, VStack, Text} from "@gluestack-ui/themed";
-import { Check, Circle, CircleCheck, Trash2 } from "lucide-react-native";
+import { Center, HStack, Icon, Text} from "@gluestack-ui/themed";
+import { Check, Circle, Trash2 } from "lucide-react-native";
 import { useState } from "react";
 import { TouchableOpacity, View,  } from "react-native";
 
 interface ShowTasksProps {
     task: string
     onDelete?: () => void
+    handleWithTask?: () => void
+    isChecket?: boolean
 }
 
-export function ShowTasks({ task, onDelete, ...rest }: ShowTasksProps) {
-    const [isChecket, setIsChecket] = useState(false)
+export function ShowTasks({ task, onDelete, isChecket, handleWithTask, ...rest }: ShowTasksProps) {
     
     return (
         <HStack 
@@ -21,10 +22,12 @@ export function ShowTasks({ task, onDelete, ...rest }: ShowTasksProps) {
             justifyContent="space-between"
             alignItems="center"
         >
+            <TouchableOpacity onPress={handleWithTask}>
                 {isChecket 
                     ? <Icon as={Circle} color="$cyan400" size="lg" m={"$0.5"}/> 
                     : <Icon as={Check} color="$cyan400" m={"$0.5"} margin={"$2"}  rounded={"$full"} bgColor="$cyan900"/>
                 }
+            </TouchableOpacity>
 
                 <Text flex={1} numberOfLines={2} color="$secondary400">
                     {task}

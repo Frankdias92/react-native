@@ -10,16 +10,11 @@ export function Home() {
     }
     
     return (
-        <ScrollView 
-            contentContainerStyle={{ flexGrow: 1 }}
-            showsVerticalScrollIndicator={false}
-        >
-            <VStack flex={1} bgColor="$secondary800">
-                <HomeHeader />
-                <Center flex={1} justifyContent="flex-start" px={"$8"}>
-                    <Main />
-                </Center>
-            </VStack>
-        </ScrollView>
+        <VStack flex={1} bgColor="$secondary800">
+            <HomeHeader />
+            <Center flex={1} justifyContent="flex-start" px={"$8"}>
+                <Main />
+            </Center>
+        </VStack>
     )
 }

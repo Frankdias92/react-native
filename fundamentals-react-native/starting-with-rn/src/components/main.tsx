@@ -1,4 +1,4 @@
-import { Center, HStack, Icon, Text, VStack } from "@gluestack-ui/themed";
+import { Center, HStack, Icon, ScrollView, Text, VStack } from "@gluestack-ui/themed";
 import { ButtonComponent } from "./buttonComponent";
 import { ShowTasksResults } from "./showTasksResults";
 import { ShowTasks } from "./showTasks";
@@ -14,6 +14,7 @@ interface TasksProps {
 export function Main() {
     const [data, setData] = useState<TasksProps[]>([])
     const [newTask, setNewTask] = useState<string>('')
+    const [isTaskFineshed, setIsTaskFineshed] = useState<boolean>(false)
 
     const { tokens } = gluestackUIConfig
     const iconSize = tokens.fontSizes["9xl"]
@@ -29,6 +30,11 @@ export function Main() {
 
     const handleDeleteTask = (value: string) => {
         setData((prevData) => prevData.filter((item) => item.task !== value))
+    }
+
+    const handleTaskFineshed = () => {
+        setIsTaskFineshed(isTaskFineshed => !isTaskFineshed)
+        console.log('click' , isTaskFineshed)
     }
     
     return (
@@ -50,22 +56,34 @@ export function Main() {
             </HStack>
 
             <VStack flex={1} w={"$full"} mx={"$8"}>
-                {data.length >= 1 
-                    ? (
-                            <FlatList 
-                                data={data}
-                                keyExtractor={(item) => item.task}
-                                renderItem={( {item} ) => <ShowTasks task={item.task} onDelete={() => handleDeleteTask(item.task)}/> }
-                            />
+                <ScrollView 
+                    contentContainerStyle={{ flexGrow: 1 }}
+                    showsVerticalScrollIndicator={false}
+                >
+                    {data.length >= 1 
+                        ? (
+                                <FlatList 
+                                    data={data}
+                                    keyExtractor={(item) => item.task}
+                                    renderItem={( {item} ) => (
+                                        <ShowTasks 
+                                            task={item.task} 
+                                            onDelete={() => handleDeleteTask(item.task)}
+                                            isChecket={isTaskFineshed}
+                                            handleWithTask={handleTaskFineshed}
+                                        />
+                                    ) }
+                                />
+                            )
+                        : (
+                            <Center mt={"$10"}>
+                                <ClipboardPenLine className="text-stone-600 mb-4"  size={56}/>
+                                <Text fontWeight={"$bold"}>Você ainda não tem tarefas cadastradas</Text>
+                                <Text>Crie tarefas e organize seus itens a fazer</Text>
+                            </Center>
                         )
-                    : (
-                        <Center mt={"$10"}>
-                            <ClipboardPenLine className="text-stone-600 mb-4"  size={56}/>
-                            <Text fontWeight={"$bold"}>Você ainda não tem tarefas cadastradas</Text>
-                            <Text>Crie tarefas e organize seus itens a fazer</Text>
-                        </Center>
-                    )
-                }
+                    }
+            </ScrollView>
             </VStack>
 
         </Center>
