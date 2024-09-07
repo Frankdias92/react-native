@@ -31,7 +31,7 @@ export function ButtonComponent({ isInvalid, ...rest }: ButtonProps) {
                     />
                 </GluestackInput>
                 
-                <Button  height={"$12"}>
+                <Button  height={"$12"} bgColor="$cyan400">
                     <Icon as={PlusCircle} color="$trueGray100" />
                 </Button>
             </HStack>
