@@ -18,9 +18,6 @@ export function Main() {
     const [newTask, setNewTask] = useState<string>('')
     const [totalTasksFineshed, setTotalTasksFineshed] = useState<number>(0)
 
-    const { tokens } = gluestackUIConfig
-    const iconSize = tokens.fontSizes["9xl"]
-
     const handleAddTask = () => {
         if (newTask.trim() === '') {
             return

@@ -23,21 +23,24 @@ This is a simple task management application built with **React Native** and sty
 - **NativeWind**: Tailwind CSS in React Native for utility-first styling.
 - **React Navigation**: Manages navigation within the app, including stacks and screens.
 
-## Installation
+## Releases
 
-1. Clone the repository:
+You can test the latest version of the app directly from the available release. Follow the steps below to download and run the release:
+
+1. **Download the latest release:**  
+   Visit the [releases page](https://github.com/Frankdias92/react-native/releases/tag/v1.0.0) and download the file corresponding to the release you want to test (typically a `.zip` or `.tar.gz` file).
+
+2. **Extract the downloaded file:**
+   - On Windows, right-click the file and select "Extract Here" or use a decompression tool.
+   - On macOS or Linux, you can use the terminal with the `unzip` or `tar -xzvf` command (depending on the format).
+
+3. **Navigate to the extracted directory:**
 
     ```bash
-    git clone https://github.com/your-username/task-manager.git
+    cd path/to/extracted-directory
     ```
 
-2. Navigate to the project directory:
-
-    ```bash
-    cd task-manager
-    ```
-
-3. Install the dependencies:
+4. **Install dependencies:**
 
     ```bash
     npm install
@@ -45,23 +48,18 @@ This is a simple task management application built with **React Native** and sty
     yarn install
     ```
 
-4. Run the app:
+5. **Run the app:**
 
     ```bash
-    npm run start
-    # or
-    yarn start
+    npx run start
     ```
 
 To run the app on specific platforms:
 
 ```bash
-npm run android  # For Android
-npm run ios      # For iOS
-npm run web      # For Web
-```
-
-Make sure your React Native development environment is properly set up to run the project on an emulator or a physical device.
+npx run android  # For Android
+npx run ios      # For iOS
+npx run web      # For Web
 
 ## Project Structure
 
@@ -106,24 +104,43 @@ Make sure your React Native development environment is properly set up to run th
 Here is an example of how the app handles task management:
 
 ```typescript
-const [tasks, setTasks] = useState<TaskProps[]>([]);
-const [taskInput, setTaskInput] = useState<string>('');
-const [completedTaskCount, setCompletedTaskCount] = useState<number>(0);
+ const [data, setData] = useState<TasksProps[]>([])
+    const [newTask, setNewTask] = useState<string>('')
+    const [totalTasksFineshed, setTotalTasksFineshed] = useState<number>(0)
 
-const handleAddTask = () => {
-    if (taskInput.trim() === '') return;
-    setTasks((prevTasks) => [...prevTasks, { title: taskInput, isCompleted: false }]);
-    setTaskInput('');
-};
+    const handleAddTask = () => {
+        if (newTask.trim() === '') {
+            return
+        }
+        setData((prevData) => [...prevData, { 
+            id: String(new Date().getTime()), 
+            task: newTask, 
+            isFinished: false 
+        }])
+        setNewTask('')
+    }
 
-const handleToggleTaskCompletion = (taskTitle: string) => {
-    setTasks((prevTasks) =>
-        prevTasks.map((task) =>
-            task.title === taskTitle ? { ...task, isCompleted: !task.isCompleted } : task
+    const handleDeleteTask = (id: string) => {
+        setData((prevData) => prevData.filter((item) => item.id !== id))
+        const removeTask = data.find((item) => item.id === id)
+
+        if (removeTask?.isFinished) {
+            setTotalTasksFineshed((prev) => prev - 1)
+        }
+    }
+
+    const handleTaskFinished = async (id: string) => {
+        setData((prevData) => prevData.map((item) => {
+            if (item.id === id) {
+                const updateTask = { ...item, isFinished: !item.isFinished }
+
+                setTotalTasksFineshed((prev) => updateTask.isFinished ? prev + 1 : prev - 1)
+                return updateTask
+            }
+            return item
+        }) 
         )
-    );
-    setCompletedTaskCount(prevTasks.filter(task => task.isCompleted).length);
-};
+    }
 ```
 
 ## License
