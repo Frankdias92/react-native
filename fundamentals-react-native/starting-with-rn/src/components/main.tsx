@@ -2,7 +2,7 @@ import { Center, HStack, Icon, ScrollView, Text, VStack } from "@gluestack-ui/th
 import { ButtonComponent } from "./buttonComponent";
 import { ShowTasksResults } from "./showTasksResults";
 import { ShowTasks } from "./showTasks";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ClipboardPenLine, View } from "lucide-react-native";
 import { gluestackUIConfig } from "@gluestack-ui/config";
 import { FlatList } from "react-native";
@@ -28,31 +28,30 @@ export function Main() {
         setData((prevData) => [...prevData, { 
             id: String(new Date().getTime()), 
             task: newTask, 
-            isFinished: !false 
+            isFinished: false 
         }])
         setNewTask('')
     }
 
-    const handleDeleteTask = (value: string) => {
-        setData((prevData) => prevData.filter((item) => item.task !== value))
-        const removeTask = data.find((item) => item.task === value)
+    const handleDeleteTask = (id: string) => {
+        setData((prevData) => prevData.filter((item) => item.id !== id))
+        const removeTask = data.find((item) => item.id === id)
 
         if (removeTask?.isFinished) {
             setTotalTasksFineshed((prev) => prev - 1)
         }
     }
 
-    const handleTaskFinished = (task: string) => {
+    const handleTaskFinished = async (id: string) => {
         setData((prevData) => prevData.map((item) => {
-            if (item.task === task) {
+            if (item.id === id) {
                 const updateTask = { ...item, isFinished: !item.isFinished }
 
-                setTotalTasksFineshed((prev) => updateTask.isFinished ? prev - 1 : prev + 1)
+                setTotalTasksFineshed((prev) => updateTask.isFinished ? prev + 1 : prev - 1)
                 return updateTask
             }
             return item
         }) 
-
         )
     }
     
@@ -84,9 +83,9 @@ export function Main() {
                                     renderItem={( {item} ) => (
                                         <ShowTasks 
                                             task={item.task} 
-                                            onDelete={() => handleDeleteTask(item.task)}
+                                            onDelete={() => handleDeleteTask(item.id)}
                                             isChecket={item.isFinished}
-                                            handleWithTask={() => handleTaskFinished(item.task)}
+                                            handleWithTask={() => handleTaskFinished(item.id)}
                                             />
                                         ) }
                                         showsVerticalScrollIndicator={false}

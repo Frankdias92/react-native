@@ -25,7 +25,7 @@ export function ShowTasks({ task, onDelete, isChecket, handleWithTask, ...rest }
         >
             <TouchableOpacity onPress={handleWithTask}>
                 <VStack w={"$5"}>
-                    {isChecket 
+                    {!isChecket 
                         ? <Icon as={Circle} color="$cyan400" size="lg"/> 
                         : <Icon as={Check} color="$cyan400" rounded={"$full"} bgColor="$cyan900"/>
                     }
