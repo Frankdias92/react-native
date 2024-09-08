@@ -35,8 +35,8 @@ export function ShowTasks({ task, onDelete, isChecket, handleWithTask, ...rest }
                 <Text 
                     flex={1} 
                     numberOfLines={2} 
-                    color="$secondary400" 
-                    textDecorationLine={!isChecket ? "line-through" : 'none'}
+                    color={isChecket ? "$secondary400" : "$secondary300"}
+                    textDecorationLine={isChecket ? "line-through" : 'none'}
                 >
                     {task}
                 </Text>

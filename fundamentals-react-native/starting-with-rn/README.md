@@ -2,6 +2,11 @@
 
 This is a simple task management application built with **React Native** and styled using **Gluestack UI** and **NativeWind**. The app allows users to create, delete, and mark tasks as completed, and it provides real-time tracking of the total number of tasks.
 
+<div style="display: flex; with: auto; gap: 16px; justify-content: center">
+    <img src="./assets/demoPreview.gif" style="display: flex; height: 850px; border-radius:25px"/>
+    <img src="./assets/preview.png" style="display: flex; height: 850px; border-radius:25px"/>
+</div>
+
 ## Features
 
 - **Add Task**: Allows users to create new tasks.
