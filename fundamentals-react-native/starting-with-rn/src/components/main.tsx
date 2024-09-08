@@ -9,12 +9,13 @@ import { FlatList } from "react-native";
 
 interface TasksProps {
     task: string
+    isFinished: boolean
 }
 
 export function Main() {
     const [data, setData] = useState<TasksProps[]>([])
     const [newTask, setNewTask] = useState<string>('')
-    const [isTaskFineshed, setIsTaskFineshed] = useState<boolean>(false)
+    const [totalTasksFineshed, setTotalTasksFineshed] = useState<number>(0)
 
     const { tokens } = gluestackUIConfig
     const iconSize = tokens.fontSizes["9xl"]
@@ -23,17 +24,31 @@ export function Main() {
         if (newTask.trim() === '') {
             return
         }
-    
-        setData((prevData) => [...prevData, { task: newTask }])
+        setData((prevData) => [...prevData, { task: newTask, isFinished: !false }])
         setNewTask('')
     }
 
     const handleDeleteTask = (value: string) => {
         setData((prevData) => prevData.filter((item) => item.task !== value))
+        const removeTask = data.find((item) => item.task === value)
+
+        if (removeTask?.isFinished) {
+            setTotalTasksFineshed((prev) => prev - 1)
+        }
     }
 
-    const handleTaskFineshed = () => {
-        setIsTaskFineshed(isTaskFineshed => !isTaskFineshed)
+    const handleTaskFinished = (task: string) => {
+        setData((prevData) => prevData.map((item) => {
+            if (item.task === task) {
+                const updateTask = { ...item, isFinished: !item.isFinished }
+
+                setTotalTasksFineshed((prev) => updateTask.isFinished ? prev - 1 : prev + 1)
+                return updateTask
+            }
+            return item
+        }) 
+
+        )
     }
     
     return (
@@ -50,8 +65,8 @@ export function Main() {
                 borderBottomWidth={1} pb={"$4"} 
                 borderBottomColor="$trueGray500"
             >
-                <ShowTasksResults label="Created" value="0"/>
-                <ShowTasksResults label="Finished" value="0"/>
+                <ShowTasksResults label="Created" value={data.length}/>
+                <ShowTasksResults label="Finished" value={totalTasksFineshed}/>
             </HStack>
 
             <VStack flex={1} w={"$full"} mx={"$8"}>
@@ -68,8 +83,8 @@ export function Main() {
                                         <ShowTasks 
                                             task={item.task} 
                                             onDelete={() => handleDeleteTask(item.task)}
-                                            isChecket={isTaskFineshed}
-                                            handleWithTask={handleTaskFineshed}
+                                            isChecket={item.isFinished}
+                                            handleWithTask={() => handleTaskFinished(item.task)}
                                         />
                                     ) }
                                 />

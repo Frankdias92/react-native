@@ -4,7 +4,7 @@ import { Text } from "react-native";
 
 interface ShowTasksResults {
     label: string
-    value: string
+    value: number
 }
 
 export function ShowTasksResults({label, value}: ShowTasksResults) {
