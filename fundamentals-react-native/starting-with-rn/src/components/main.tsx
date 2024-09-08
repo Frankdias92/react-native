@@ -8,6 +8,7 @@ import { gluestackUIConfig } from "@gluestack-ui/config";
 import { FlatList } from "react-native";
 
 interface TasksProps {
+    id: string
     task: string
     isFinished: boolean
 }
@@ -24,7 +25,11 @@ export function Main() {
         if (newTask.trim() === '') {
             return
         }
-        setData((prevData) => [...prevData, { task: newTask, isFinished: !false }])
+        setData((prevData) => [...prevData, { 
+            id: String(new Date().getTime()), 
+            task: newTask, 
+            isFinished: !false 
+        }])
         setNewTask('')
     }
 
@@ -70,23 +75,21 @@ export function Main() {
             </HStack>
 
             <VStack flex={1} w={"$full"} mx={"$8"}>
-                <ScrollView 
-                    contentContainerStyle={{ flexGrow: 1 }}
-                    showsVerticalScrollIndicator={false}
-                >
+                <Center >
                     {data.length >= 1 
                         ? (
                                 <FlatList 
                                     data={data}
-                                    keyExtractor={(item) => item.task}
+                                    keyExtractor={(item) => item.id}
                                     renderItem={( {item} ) => (
                                         <ShowTasks 
                                             task={item.task} 
                                             onDelete={() => handleDeleteTask(item.task)}
                                             isChecket={item.isFinished}
                                             handleWithTask={() => handleTaskFinished(item.task)}
-                                        />
-                                    ) }
+                                            />
+                                        ) }
+                                        showsVerticalScrollIndicator={false}
                                 />
                             )
                         : (
@@ -97,7 +100,7 @@ export function Main() {
                             </Center>
                         )
                     }
-            </ScrollView>
+            </Center>
             </VStack>
 
         </Center>
