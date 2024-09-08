@@ -34,7 +34,6 @@ export function Main() {
 
     const handleTaskFineshed = () => {
         setIsTaskFineshed(isTaskFineshed => !isTaskFineshed)
-        console.log('click' , isTaskFineshed)
     }
     
     return (

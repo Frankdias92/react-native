@@ -28,6 +28,8 @@ export function ButtonComponent({ isInvalid, onClick, ...rest }: ButtonProps) {
                         fontFamily="$body" 
                         // borderRadius={"$md"}
                         placeholderTextColor={"$trueGray400"}
+                        onSubmitEditing={onClick}
+                        returnKeyType="done"
                         {...rest}
                     />
                 </GluestackInput>

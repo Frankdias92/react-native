@@ -1,4 +1,4 @@
-import { Center, HStack, Icon, Text} from "@gluestack-ui/themed";
+import { Center, HStack, Icon, Text, VStack} from "@gluestack-ui/themed";
 import { Check, Circle, Trash2 } from "lucide-react-native";
 import { useState } from "react";
 import { TouchableOpacity, View,  } from "react-native";
@@ -18,18 +18,26 @@ export function ShowTasks({ task, onDelete, isChecket, handleWithTask, ...rest }
             mt={"$5"}
             bg="$secondary700" 
             p={"$5"} 
+            gap={"$2"}
             rounded={"$md"}
             justifyContent="space-between"
             alignItems="center"
         >
             <TouchableOpacity onPress={handleWithTask}>
-                {isChecket 
-                    ? <Icon as={Circle} color="$cyan400" size="lg" m={"$0.5"}/> 
-                    : <Icon as={Check} color="$cyan400" m={"$0.5"} margin={"$2"}  rounded={"$full"} bgColor="$cyan900"/>
-                }
+                <VStack w={"$5"}>
+                    {isChecket 
+                        ? <Icon as={Circle} color="$cyan400" size="lg"/> 
+                        : <Icon as={Check} color="$cyan400" rounded={"$full"} bgColor="$cyan900"/>
+                    }
+                </VStack>
             </TouchableOpacity>
 
-                <Text flex={1} numberOfLines={2} color="$secondary400">
+                <Text 
+                    flex={1} 
+                    numberOfLines={2} 
+                    color="$secondary400" 
+                    textDecorationLine={!isChecket ? "line-through" : 'none'}
+                >
                     {task}
                 </Text>
                 <TouchableOpacity onPress={onDelete}>
