@@ -77,23 +77,36 @@ Navigation is divided into:
 We use **Gluestack UI** and the **Gluestack UI Config** theme to define colors and sizes, ensuring visual consistency throughout the app.
 
 ## How to Run the Project
+## Releases
 
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/username/fit-app-01.git
-   ```
+You can test the latest version of the app directly from the available release. Follow the steps below to download and run the release:
 
-2. Install the dependencies:
-   ```bash
-   npm install
-   ```
+1. **Download the latest release:**  
+   Visit the [releases page](https://github.com/Frankdias92/react-native/releases/tag/v1.0.0) and download the file corresponding to the release you want to test (typically a `.zip` or `.tar.gz` file).
 
-3. Start the project using Expo:
-   ```bash
-   npx expo start
-   ```
+2. **Extract the downloaded file:**
+   - On Windows, right-click the file and select "Extract Here" or use a decompression tool.
+   - On macOS or Linux, you can use the terminal with the `unzip` or `tar -xzvf` command (depending on the format).
 
-4. To run on Android, iOS, or web:
+3. **Navigate to the extracted directory:**
+
+    ```bash
+    cd path/to/extracted-directory
+    ```
+
+4. **Install dependencies:**
+
+    ```bash
+    npm install
+    # or
+    yarn install
+    ```
+
+5. To run on Android, iOS, or web:
    - Android: `npx expo start --android`
    - iOS: `npx expo start --ios`
    - Web: `npx expo start --web`
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
