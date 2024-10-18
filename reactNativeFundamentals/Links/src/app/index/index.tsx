@@ -16,21 +16,49 @@ import { colors } from '@/styles/colors'
 
 export default function Index() {
   const [links, setLinks] = useState<LinkStorage[]>()
+  const [showModal, setShowModal] = useState(false)
   const [category, setCategory] = useState(categories[0].name)
+
+  const [link, setLink] = useState<LinkStorage>({} as LinkStorage)
 
   async function getLinks() {
     try {
       const response = await LinkStorage.get()
-      setLinks(response)
 
+      const filtered = response.filter((link) => link.category === category)
+      
+      setLinks(filtered)
     } catch (error) {
       Alert.alert('Error', 'Ops! somenthing goes wrong to loader the links')
     }
   }
 
+  function handleDetails(selected: LinkStorage) {
+    setShowModal(true)
+    setLink(selected)
+  }
+
+  async function removeLink() {
+    try {
+      await LinkStorage.remove(link.id)
+      getLinks()
+      setShowModal(false)
+    } catch (error) {
+      Alert.alert('Error', 'Something goes wrong on delete')
+      console.log(error)
+    }
+  }
+
+  async function handleRemove () {
+    Alert.alert('Remove', 'Are you sure?', [
+      { style: 'cancel', text: 'No' },
+      { text: 'Yes', onPress: removeLink }
+    ])
+  }
+
   useFocusEffect(useCallback(() => {
     getLinks()
-  }, []))
+  }, [category]))
   
   return (
     <View style={style.containter}>
@@ -55,7 +83,7 @@ export default function Index() {
         renderItem={({ item }) => (
           <Link 
             name={item.name} 
-            url={item.url} onDetails={() => console.log('Click')}
+            url={item.url} onDetails={() => handleDetails(item)}
           />
         )}
         style={style.links}
@@ -63,29 +91,38 @@ export default function Index() {
         showsVerticalScrollIndicator={false}
       />
 
-      <Modal transparent visible={false} >
+      <Modal 
+        transparent 
+        visible={showModal} 
+        animationType='slide'
+      >
         <View style={style.modal}>
           <View style={style.modalContent}>
             <View style={style.modalHeader}>
               <Text style={style.modalCategory}>
-                Curso
+                {link.category}
               </Text>
 
-              <TouchableOpacity >
+              <TouchableOpacity onPress={() => setShowModal(false)}>
                 <MaterialIcons name='close' size={20} color={colors.gray[400]}/>
               </TouchableOpacity>
             </View>
 
             <Text style={style.modalLinkName}>
-              Test
+              {link.name}
             </Text>
 
             <Text style={style.modalLinkName}>
-              www.test.com
+              {link.url}
             </Text>
 
             <View style={style.modalFooter}>
-              <Option name='Delete' icon='delete' variant='secondary'/>
+              <Option 
+                name='Delete' 
+                icon='delete' 
+                variant='secondary'
+                onPress={handleRemove}
+              />
               <Option name='Open' icon='language'/>
             </View>
 

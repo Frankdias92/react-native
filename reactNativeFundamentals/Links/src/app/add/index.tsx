@@ -38,7 +38,12 @@ export default function Add() {
 
       const data = await LinkStorage.get()
       
-      console.log(data)
+      Alert.alert('Success', 'New link added', [
+        {
+          text: 'Ok',
+          onPress: () => router.back()
+        }
+      ])
     } catch (error) {
       Alert.alert('Error', 'Something goes wrong on save the link')
       console.log(error)
