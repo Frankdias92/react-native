@@ -1,4 +1,4 @@
-import { GestureResponderEvent, Text, TouchableOpacity, View } from "react-native";
+import { Alert, GestureResponderEvent, Text, TouchableOpacity, View } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
 import { colors } from "@/styles/colors";
 import { styles } from "./style";
@@ -15,6 +15,18 @@ export default function Add() {
   const [category, setCategory] = useState('')
   
   function handleClick(value: GestureResponderEvent) {
+    if(!category) {
+      return Alert.alert('Category', 'select the category')
+    }
+
+    if (!name) {
+      return Alert.alert('name', 'Insert a title')
+    }
+
+    if (!adress) {
+      return Alert.alert('Website', 'Insert a link')
+    }
+    
     console.log({ name, adress })
   }
 
@@ -31,12 +43,12 @@ export default function Add() {
 
       <View style={styles.form}>
         <Input 
-          placeholder="Name" 
+          placeholder="Title" 
           autoCorrect={false} 
           onChangeText={(value) => setName(value)}
         />
         <Input 
-          placeholder="Name"
+          placeholder="Website"
           onChangeText={(value) => setAdress(value)}
         />
 
