@@ -1,14 +1,18 @@
 import { FlatList, Image, Modal, TouchableOpacity, View, Text, Alert } from 'react-native'
-import { style } from './styles'
 import { MaterialIcons } from '@expo/vector-icons'
-import { colors } from '@/styles/colors'
+import { style } from './styles'
+
+import { useCallback, useState } from 'react'
+
+import { router, useFocusEffect } from 'expo-router'
+
 import { Categories } from '@/components/categories'
-import { Link } from '@/components/link'
-import { Option } from '@/components/option'
-import { router } from 'expo-router'
-import { useEffect, useState } from 'react'
-import { categories } from '@/utils/categories'
 import { LinkStorage } from '@/storage/link-storage'
+import { Option } from '@/components/option'
+import { Link } from '@/components/link'
+
+import { categories } from '@/utils/categories'
+import { colors } from '@/styles/colors'
 
 export default function Index() {
   const [links, setLinks] = useState<LinkStorage[]>()
@@ -24,9 +28,9 @@ export default function Index() {
     }
   }
 
-  useEffect(() => {
+  useFocusEffect(useCallback(() => {
     getLinks()
-  }, [category])
+  }, []))
   
   return (
     <View style={style.containter}>
