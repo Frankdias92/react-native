@@ -1,17 +1,32 @@
-import { FlatList, Image, Modal, TouchableOpacity, View, Text } from 'react-native'
+import { FlatList, Image, Modal, TouchableOpacity, View, Text, Alert } from 'react-native'
 import { style } from './styles'
 import { MaterialIcons } from '@expo/vector-icons'
 import { colors } from '@/styles/colors'
-import { Category } from '@/components/category'
 import { Categories } from '@/components/categories'
 import { Link } from '@/components/link'
 import { Option } from '@/components/option'
 import { router } from 'expo-router'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { categories } from '@/utils/categories'
+import { LinkStorage } from '@/storage/link-storage'
 
 export default function Index() {
+  const [links, setLinks] = useState<LinkStorage[]>()
   const [category, setCategory] = useState(categories[0].name)
+
+  async function getLinks() {
+    try {
+      const response = await LinkStorage.get()
+      setLinks(response)
+
+    } catch (error) {
+      Alert.alert('Error', 'Ops! somenthing goes wrong to loader the links')
+    }
+  }
+
+  useEffect(() => {
+    getLinks()
+  }, [category])
   
   return (
     <View style={style.containter}>
@@ -31,11 +46,12 @@ export default function Index() {
       <Categories onChange={setCategory} selected={category}/>
 
       <FlatList 
-        data={['1','2','3',]}
-        keyExtractor={item => item}
-        renderItem={() => (
+        data={links}
+        keyExtractor={item => item.id}
+        renderItem={({ item }) => (
           <Link 
-            name='Rocketseat' url='https://www.google.com' onDetails={() => console.log('Click')}
+            name={item.name} 
+            url={item.url} onDetails={() => console.log('Click')}
           />
         )}
         style={style.links}

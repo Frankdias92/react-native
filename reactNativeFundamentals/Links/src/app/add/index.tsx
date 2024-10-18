@@ -7,6 +7,7 @@ import { Categories } from "@/components/categories";
 import { Input } from "@/components/input";
 import { Button } from "@/components/button";
 import { useState } from "react";
+import { LinkStorage } from "@/storage/link-storage";
 
 
 export default function Add() {
@@ -14,20 +15,34 @@ export default function Add() {
   const [adress, setAdress] = useState('')
   const [category, setCategory] = useState('')
   
-  function handleClick(value: GestureResponderEvent) {
-    if(!category) {
-      return Alert.alert('Category', 'select the category')
-    }
+  async function handleClick(value: GestureResponderEvent) {
+    try {
+      if(!category) {
+        return Alert.alert('Category', 'select the category')
+      }
+  
+      if (!name) {
+        return Alert.alert('name', 'Insert a title')
+      }
+  
+      if (!adress) {
+        return Alert.alert('Website', 'Insert a link')
+      }
 
-    if (!name) {
-      return Alert.alert('name', 'Insert a title')
-    }
+      await LinkStorage.save({
+        id: new Date().getTime().toString(),
+        name,
+        url: adress,
+        category
+      })
 
-    if (!adress) {
-      return Alert.alert('Website', 'Insert a link')
+      const data = await LinkStorage.get()
+      
+      console.log(data)
+    } catch (error) {
+      Alert.alert('Error', 'Something goes wrong on save the link')
+      console.log(error)
     }
-    
-    console.log({ name, adress })
   }
 
   return (
@@ -49,6 +64,7 @@ export default function Add() {
         />
         <Input 
           placeholder="Website"
+          autoCapitalize="none"
           onChangeText={(value) => setAdress(value)}
         />
 
