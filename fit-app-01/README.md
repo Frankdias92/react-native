@@ -1,4 +1,5 @@
 # Fit App
+
 <img src='./src/assets/preview.png' alt="Puzzle Piece" width="auto" />
 
 ## Introduction
