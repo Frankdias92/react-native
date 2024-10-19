@@ -1,4 +1,3 @@
-import { Icon } from '@gluestack-ui/themed'
 import { createNativeStackNavigator, NativeStackNavigationProp } from '@react-navigation/native-stack'
 
 import { Home } from '@screens/home'

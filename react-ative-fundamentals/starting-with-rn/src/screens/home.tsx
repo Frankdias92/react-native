@@ -1,13 +1,8 @@
 import { HomeHeader } from "@components/homeHeader";
-import { ButtonComponent } from "@components/buttonComponent";
-import { Button, Center, HStack, Input, ScrollView, VStack } from "@gluestack-ui/themed";
-import { Text } from "react-native";
+import { Center, VStack } from "@gluestack-ui/themed";
 import { Main } from "@components/main";
 
 export function Home() {
-    function handleClick () {
-        console.log('click')
-    }
     
     return (
         <VStack flex={1} bgColor="$secondary800">

@@ -71,7 +71,7 @@ export function Main() {
             </HStack>
 
             <VStack flex={1} w={"$full"} mx={"$8"}>
-                <Center >
+                <Center mt={"$3"}>
                     {data.length >= 1 
                         ? (
                                 <FlatList 
@@ -91,8 +91,8 @@ export function Main() {
                         : (
                             <Center mt={"$10"}>
                                 <ClipboardPenLine className="text-stone-600 mb-4"  size={56}/>
-                                <Text fontWeight={"$bold"}>Você ainda não tem tarefas cadastradas</Text>
-                                <Text>Crie tarefas e organize seus itens a fazer</Text>
+                                <Text fontWeight={"$bold"}>You do not have registered tasks yet</Text>
+                                <Text>Create tasks and organize your to-do items</Text>
                             </Center>
                         )
                     }

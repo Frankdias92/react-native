@@ -15,7 +15,7 @@ export function ShowTasks({ task, onDelete, isChecket, handleWithTask, ...rest }
     return (
         <HStack 
             w={"$full"}
-            mt={"$5"}
+            mt={"$2"}
             bg="$secondary700" 
             p={"$5"} 
             gap={"$2"}
