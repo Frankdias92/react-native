@@ -21,7 +21,7 @@ export function Button({ title, isLoading = false, variant = 'solid', ...rest }:
         >
             { isLoading ? <ButtonSpinner color={"$white"}/> :
                 <Text 
-                    color={variant === "outline" ? "$green500" : "$white" }
+                    color={"$secondary100"}
                     fontFamily="$heading"
                     fontSize={"$sm"}
                     disabled={isLoading}
