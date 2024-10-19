@@ -1,5 +1,7 @@
 # Task Manager
 
+<img src="./assets/mainPreview.png" alt="Puzzle Piece" width="auto" />
+
 This is a simple task management application built with **React Native** and styled using **Gluestack UI** and **NativeWind**. The app allows users to create, delete, and mark tasks as completed, and it provides real-time tracking of the total number of tasks.
 
 <div style="display: flex; with: auto; gap: 16px; justify-content: center">
