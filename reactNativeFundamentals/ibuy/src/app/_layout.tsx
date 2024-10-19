@@ -1,31 +1,45 @@
-import { Slot, Stack } from "expo-router";
-import { View } from "react-native";
-
+import { MaterialIcons } from '@expo/vector-icons'
+import { Drawer } from 'expo-router/drawer'
+import { GestureHandlerRootView } from 'react-native-gesture-handler'
 
 export default function Layout() {
   return (
-    <View style={{ flex: 1 }}>
-      <View style={{ width: '100%', height: 70, backgroundColor: '#ee9' }}/>
-
-      {/* <Slot /> */}
-      <Stack  screenOptions={{ headerShown: false}}>
-        <Stack.Screen 
-          name="index" 
-          options={{ 
-            title: 'SignIn',
-            headerShown: false
+    <GestureHandlerRootView style={{ flex: 1 }}>
+      <Drawer 
+        screenOptions={{
+          drawerActiveTintColor: '#000',
+          drawerInactiveTintColor: '#CECECE',
+          headerShown: false
+        }}
+      >
+        <Drawer.Screen 
+          name='home'
+          options={{
+            drawerLabel: 'Home',
+            drawerIcon: ({ color, size }) => (
+              <MaterialIcons 
+                name='home'  
+                size={size}
+                color={color}
+              />
+            )
           }}
         />
-        <Stack.Screen 
-          name="signUp" 
-          options={{ 
-            title: 'Create New Account',
-            headerShown: true
+
+        <Drawer.Screen 
+          name='tabs'
+          options={{
+            drawerLabel: 'Tabs & Drawer',
+            drawerIcon: ({ color, size }) => (
+              <MaterialIcons 
+                name='home'  
+                size={size}
+                color={color}
+              />
+            ),
           }}
         />
-      </Stack>
-
-      <View style={{ width: '100%', height: 70, backgroundColor: '#9ee' }}/>
-    </View>
+      </Drawer>
+    </GestureHandlerRootView>
   )
 }
