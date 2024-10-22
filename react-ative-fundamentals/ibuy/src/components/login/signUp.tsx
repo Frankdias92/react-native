@@ -5,7 +5,6 @@ import { UserDTO } from "@/dtos/UserDTO";
 import { useAuth } from "@/hooks/useAuth";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { styles } from "./style";
-import { send } from "process";
 
 
 export default function HandleWithSignUp() {
@@ -22,13 +21,38 @@ export default function HandleWithSignUp() {
       password: "",
     },
   })
+
+  // const showToast = () => {
+  //   // ToastAndroid.show('A pikachu appeared nearby !', ToastAndroid.SHORT);
+
+  //   // ToastAndroid.showWithGravity(
+  //   //   'All Your Base Are Belong To Us',
+  //   //   ToastAndroid.SHORT,
+  //   //   ToastAndroid.CENTER,
+  //   // );
+
+  //   ToastAndroid.showWithGravity(
+  //     'Test top',
+  //     ToastAndroid.TOP,
+  //     ToastAndroid.CENTER,
+  //   );
+
+  //   // ToastAndroid.showWithGravityAndOffset(
+  //   //   'A wild toast appeared!',
+  //   //   ToastAndroid.LONG,
+  //   //   ToastAndroid.BOTTOM,
+  //   //   25,
+  //   //   50,
+  //   // );
+  // };
+  
   const onSubmit = (data: UserDTO) => {
-    signUp(data)
+    
     if (data)
-    Alert.alert('Success', 'New Account Created', [
+      Alert.alert('Success', 'New Account Created', [
       {
         text: 'SignIn',
-        onPress: () => console.log('ok')
+        onPress: () => signUp(data)
       }
     ]
   )
@@ -93,7 +117,7 @@ export default function HandleWithSignUp() {
             value={value}
             placeholderTextColor={'#999999'}
             style={styles.input}
-            onSubmitEditing={send}
+            // onSubmitEditing={}
           />
         )}
         name="password"
@@ -106,6 +130,7 @@ export default function HandleWithSignUp() {
       >
         <Text style={styles.text}>Submit</Text>
       </TouchableOpacity>
+
     </>
   )
 }

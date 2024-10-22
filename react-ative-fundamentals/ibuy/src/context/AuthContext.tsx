@@ -19,6 +19,7 @@ type AuthContextProviderProps = {
 
 export function AuthContextProvider({ children }: AuthContextProviderProps) {
   const [user, setUser] = useState<UserDTO>({} as UserDTO)
+  
 
   function signIn (data: UserDTO) {
     if (data.email === user.email && data.password === user.password) {

@@ -1,4 +1,4 @@
-import { Text, View, TextInput, Button, Alert } from "react-native"
+import { Text, View, TextInput, Button, Alert, ToastAndroid } from "react-native"
 import { useForm, Controller } from "react-hook-form"
 
 import { UserDTO } from "@/dtos/UserDTO";
@@ -22,9 +22,9 @@ export default function HandleWithSignIn() {
   const onSubmit = (data: UserDTO) => {
     if (data) {
       if (user.email === data.email && user.password === data.password) {
-        console.log(true)
         signIn(data)
-      } else console.log(false)
+        ToastAndroid.show('Welcome !', ToastAndroid.SHORT);
+      } else ToastAndroid.show('Ops! something wrong with your data.', ToastAndroid.LONG);
     }
   }
 
