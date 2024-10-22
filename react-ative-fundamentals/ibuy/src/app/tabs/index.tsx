@@ -1,9 +1,13 @@
 import { DrawerToggleButton } from '@react-navigation/drawer'
-import { router } from 'expo-router'
 import { View, StyleSheet, TouchableOpacity, Text } from 'react-native'
 
-export default function Index() {
+import { useContext } from 'react'
+import { AuthContext } from '@/context/AuthContext'
+import { useAuth } from '@/hooks/useAuth'
 
+export default function Index() {
+  const { user }  = useAuth()
+  console.log('user', user)
   
   return (
     <View style={styles.container}>

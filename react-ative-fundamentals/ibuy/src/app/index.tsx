@@ -2,7 +2,7 @@ import { router } from 'expo-router'
 import { View, StyleSheet, TouchableOpacity, Text } from 'react-native'
 
 export default function Index() {
-  function signIn() {
+  function product() {
     router.navigate('/(drawer)')
   }
   
@@ -21,14 +21,14 @@ export default function Index() {
       </TouchableOpacity>
 
       <View style={styles.wrapper}>
-        <TouchableOpacity onPress={signIn}>
+        <TouchableOpacity onPress={() => router.navigate('/signUp')}>
           <Text style={styles.ancount}>
-            Sign In
+            Sign Up
           </Text>
         </TouchableOpacity>
-        <TouchableOpacity onPress={signIn}>
+        <TouchableOpacity onPress={product}>
           <Text style={styles.ancount}>
-            Create an account
+            Product List
           </Text>
         </TouchableOpacity>
       </View>
