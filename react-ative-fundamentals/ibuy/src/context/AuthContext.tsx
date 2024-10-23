@@ -1,7 +1,12 @@
-import { createContext, ReactNode, useCallback, useState } from "react";
+import { router, useFocusEffect } from "expo-router";
+
+import { Alert } from "react-native";
+import { createContext, ReactNode, useEffect, useState } from "react";
 
 import { UserDTO } from "@/dtos/UserDTO";
-import { Alert } from "react-native";
+import { storageUserGet, storageUserSave } from "@/storage/storageUser";
+
+
 
 export type AuthContextDataProps = {
   user: UserDTO
@@ -20,14 +25,10 @@ type AuthContextProviderProps = {
 export function AuthContextProvider({ children }: AuthContextProviderProps) {
   const [user, setUser] = useState<UserDTO>({} as UserDTO)
   
-
   function signIn (data: UserDTO) {
     if (data.email === user.email && data.password === user.password) {
-      setUser({
-        email: data.email,
-        password: data.password
-      })
-      console.log('Success, Login')
+
+      router.navigate('/(drawer)')
     } else {
       Alert.alert('Error', 'your password or email are wrong')
     }
@@ -35,8 +36,21 @@ export function AuthContextProvider({ children }: AuthContextProviderProps) {
 
   function signUp(data: UserDTO) {
     setUser(data)
+    storageUserSave(data)
     console.log('Account Created')
   }
+
+  async function loadUserData() {
+    const userLogged = await storageUserGet()
+
+    if (userLogged) {
+      setUser(userLogged)
+    }
+  }
+
+  useEffect(() => {
+    loadUserData()
+  }, [])
   
   return (
     <AuthContext.Provider 

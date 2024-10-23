@@ -13,10 +13,11 @@ export default function SignUp() {
     <View style={styles.container}>
       <Text style={styles.text}>{ user.name } | { user.email } | { user.password }</Text>
 
-      { user.email ? (
-        <HandleWithSignIn />
-      ) : (
-        <HandleWithSignUp />
+      { user.email ? 
+        (
+          <HandleWithSignIn />
+        ) : (
+          <HandleWithSignUp />
         )
       }
 
