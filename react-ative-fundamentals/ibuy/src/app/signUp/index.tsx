@@ -2,12 +2,16 @@ import { Text, View } from "react-native"
 
 import { styles } from "./style";
 import { useAuth } from "@/hooks/useAuth";
-import { useState } from "react";
 import HandleWithSignUp from "@/components/login/signUp";
 import HandleWithSignIn from "@/components/login/signIn";
+import { Loading } from "@/components/loading";
 
 export default function SignUp() {
-  const { user } = useAuth()
+  const { user, isLoadingUserStorageData } = useAuth()
+  
+  if (isLoadingUserStorageData) {
+    return <Loading  />
+  }
   
   return (
     <View style={styles.container}>

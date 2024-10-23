@@ -12,6 +12,7 @@ export type AuthContextDataProps = {
   user: UserDTO
   signIn: ( data: UserDTO ) => void
   signUp: ( data: UserDTO ) => void
+  isLoadingUserStorageData: boolean
 }
 
 export const AuthContext = createContext<AuthContextDataProps>({
@@ -24,6 +25,7 @@ type AuthContextProviderProps = {
 
 export function AuthContextProvider({ children }: AuthContextProviderProps) {
   const [user, setUser] = useState<UserDTO>({} as UserDTO)
+  const [isLoadingUserStorageData, setIsLoadingUserStorage] = useState(true)
   
   function signIn (data: UserDTO) {
     if (data.email === user.email && data.password === user.password) {
@@ -41,10 +43,18 @@ export function AuthContextProvider({ children }: AuthContextProviderProps) {
   }
 
   async function loadUserData() {
-    const userLogged = await storageUserGet()
+    try {
+      const userLogged = await storageUserGet()
+  
+      if (userLogged) {
+        setUser(userLogged)
+        router.navigate('/(drawer)')
+      }
 
-    if (userLogged) {
-      setUser(userLogged)
+    } catch (error) {
+      console.error(error)
+    } finally {
+      setIsLoadingUserStorage(false)
     }
   }
 
@@ -57,7 +67,8 @@ export function AuthContextProvider({ children }: AuthContextProviderProps) {
       value={{
         user,
         signIn,
-        signUp
+        signUp,
+        isLoadingUserStorageData
       }}
     >
       { children }

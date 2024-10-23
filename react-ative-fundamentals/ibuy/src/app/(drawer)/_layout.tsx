@@ -16,12 +16,22 @@ export default function DrawerLayout() {
           }}
         />
 
-        <Drawer.Screen 
+        {/* <Drawer.Screen 
           name='configs' 
           options={{ 
             drawerLabel: 'Configs',
             drawerIcon: ({ color }) => (
               <MaterialIcons name='settings' size={20} color={color}/> 
+            )
+          }}
+        /> */}
+
+        <Drawer.Screen 
+          name='configs'
+          options={{
+            drawerLabel: 'LogOut',
+            drawerIcon: ({ color }) => (
+              <MaterialIcons name='logout' size={20} color={color} onPress={() => console.log('exit user')}/>
             )
           }}
         />
