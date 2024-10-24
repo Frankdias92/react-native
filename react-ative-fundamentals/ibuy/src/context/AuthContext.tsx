@@ -4,7 +4,7 @@ import { Alert } from "react-native";
 import { createContext, ReactNode, useEffect, useState } from "react";
 
 import { UserDTO } from "@/dtos/UserDTO";
-import { storageUserGet, storageUserSave } from "@/storage/storageUser";
+import { storageUseLogOut, storageUserGet, storageUserSave } from "@/storage/storageUser";
 
 
 
@@ -12,6 +12,7 @@ export type AuthContextDataProps = {
   user: UserDTO
   signIn: ( data: UserDTO ) => void
   signUp: ( data: UserDTO ) => void
+  logOut: () => void
   isLoadingUserStorageData: boolean
 }
 
@@ -42,8 +43,23 @@ export function AuthContextProvider({ children }: AuthContextProviderProps) {
     console.log('Account Created')
   }
 
+  async function logOut() {
+    try {
+      setIsLoadingUserStorage(true)
+      setUser({} as UserDTO)
+      await storageUseLogOut()
+
+    } catch (error) {
+      throw error
+    } finally {
+      router.navigate('/home/signUp')
+      setIsLoadingUserStorage(false)
+    }
+  }
+
   async function loadUserData() {
     try {
+      setIsLoadingUserStorage(true)
       const userLogged = await storageUserGet()
   
       if (userLogged) {
@@ -68,6 +84,7 @@ export function AuthContextProvider({ children }: AuthContextProviderProps) {
         user,
         signIn,
         signUp,
+        logOut,
         isLoadingUserStorageData
       }}
     >

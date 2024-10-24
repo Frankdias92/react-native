@@ -1,8 +1,11 @@
 import { MaterialIcons } from '@expo/vector-icons'
+
 import { Tabs } from 'expo-router'
-import { Image } from 'react-native'
-import { styles } from './user'
+import { Image, View } from 'react-native'
+
 import { useAuth } from '@/hooks/useAuth'
+import { styles } from './user'
+import { TouchableOpacity } from 'react-native-gesture-handler'
 
 
 export default function TabsLayout() {
@@ -36,10 +39,10 @@ export default function TabsLayout() {
               style={styles.logo}
               source={require('@/images/profileimg.png')}
             />
-            // <MaterialIcons name='person' color={color} size={size} />
           ),
-          tabBarLabel: user ? `${user.name}` : 'user'
+          tabBarLabel: user ? `${user.name}` : 'user',
         }}
+        
       />
 
     <Tabs.Screen name='product'
