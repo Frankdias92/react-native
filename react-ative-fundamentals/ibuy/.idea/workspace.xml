@@ -6,12 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="b898e94d-e431-41c4-9db7-2f234110f5de" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/signUp/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/signUp/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/login/signIn.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/login/signIn.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/login/signUp.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/login/signUp.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/context/AuthContext.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/context/AuthContext.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/storage/storageConfig.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/storage/storageConfig.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/storage/storageUser.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/storage/storageUser.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/storage/storageAuthTokens.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/storage/storageAuthTokens.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

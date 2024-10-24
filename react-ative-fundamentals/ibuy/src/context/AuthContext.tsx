@@ -5,6 +5,7 @@ import { createContext, ReactNode, useEffect, useState } from "react";
 
 import { UserDTO } from "@/dtos/UserDTO";
 import { storageUseLogOut, storageUserGet, storageUserSave } from "@/storage/storageUser";
+import { storageAuthTokenGet, storageAuthTokenRemove, storageAuthTokenSave } from "@/storage/storageAuthTokens";
 
 
 
@@ -27,46 +28,61 @@ type AuthContextProviderProps = {
 export function AuthContextProvider({ children }: AuthContextProviderProps) {
   const [user, setUser] = useState<UserDTO>({} as UserDTO)
   const [isLoadingUserStorageData, setIsLoadingUserStorage] = useState(false)
+
   
-  async function storageUserAndToken(user: UserDTO, token: string) {
-
-  }
-
-
   const schemaTestUser = {
     id: '1',
     name: 'Franklin',
     email: 'email',
     password: '123'
   }
-  function signIn (data: UserDTO) {
-    setUser({} as UserDTO)
+  async function userAndTokenUpdate(userData: UserDTO, token: string) {
+    setUser(userData)
+  }
 
+async function storageUserAndTokenSave(userData: UserDTO, token: string) {
+  try {
+    setIsLoadingUserStorage(true)
+    
+    await storageAuthTokenSave(token)
+    await storageUserSave(userData)
+
+  } catch (error) {
+    throw error
+  } finally {
+    setTimeout(() => {
+      setIsLoadingUserStorage(false)
+    }, 2000)
+  }
+}
+
+  async function signIn (data: UserDTO) {
     try {
-      setIsLoadingUserStorage(true)
-      if (data.name === schemaTestUser.name) {        
+      const myToken = '123456'
+
+      if (data.name === schemaTestUser.name) {   
+        setIsLoadingUserStorage(true)
+
+        await storageUserAndTokenSave(schemaTestUser, myToken)
+        userAndTokenUpdate(schemaTestUser, myToken)
+        
         ToastAndroid.show('Welcome !', ToastAndroid.TOP);
+        router.navigate('/(drawer)')
       }
     } catch (error) {
       Alert.alert('Error', 'your password or email are wrong')
     } finally {
       setTimeout(() => {
-        setUser(schemaTestUser)
-        // router.navigate('/(drawer)')
         setIsLoadingUserStorage(false)
-        console.log('timer')
-      }, 2000);
+      }, 2000)
     }
   }
-
-
 
   function signUp(data: UserDTO) {
     try {
       setIsLoadingUserStorage(true)
       setUser(data)
       storageUserSave(data)
-      console.log('Account Created')
     } catch (error) {
       throw error
     } finally {
@@ -79,11 +95,14 @@ export function AuthContextProvider({ children }: AuthContextProviderProps) {
   async function logOut() {
     try {
       setIsLoadingUserStorage(true)
+
       setUser({} as UserDTO)
       await storageUseLogOut()
+      await storageAuthTokenRemove()
 
     } catch (error) {
       throw error
+      
     } finally {
       router.navigate('/home/signUp')
       setIsLoadingUserStorage(false)
@@ -94,16 +113,19 @@ export function AuthContextProvider({ children }: AuthContextProviderProps) {
     try {
       setIsLoadingUserStorage(true)
       const userLogged = await storageUserGet()
+      const token = await storageAuthTokenGet()
   
-      if (userLogged) {
-        setUser(userLogged)
+      if (userLogged && token) {
+        userAndTokenUpdate(userLogged, token)
         router.navigate('/(drawer)')
       }
 
     } catch (error) {
       console.error(error)
     } finally {
-      setIsLoadingUserStorage(false)
+      setTimeout(() => {
+        setIsLoadingUserStorage(false)
+      }, 2000)
     }
   }
 
