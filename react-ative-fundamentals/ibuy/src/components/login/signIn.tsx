@@ -1,15 +1,15 @@
+import { TouchableOpacity } from "react-native-gesture-handler";
 import { Text, TextInput, ToastAndroid } from "react-native"
 import { useForm, Controller } from "react-hook-form"
 
 import { UserDTO } from "@/dtos/UserDTO";
 import { useAuth } from "@/hooks/useAuth";
-import { TouchableOpacity } from "react-native-gesture-handler";
+
 import { styles } from "./style";
-import { useState } from "react";
+
 
 export default function HandleWithSignIn() {
-  const [isLoading, setIsLoading] = useState(false)
-  const { signIn, user } = useAuth()
+  const { signIn, user, isLoadingUserStorageData } = useAuth()
   
   const {
     control,
@@ -21,22 +21,16 @@ export default function HandleWithSignIn() {
       password: "",
     },
   })
-  const onSubmit = async (data: UserDTO) => {
-    try {
-      setIsLoading(true)
-      if (user.email === data.email && user.password === data.password) {
-        signIn(data)
-        ToastAndroid.show('Welcome !', ToastAndroid.SHORT);
-      } else {
-        setIsLoading(false)
-        console.log('error')
-        ToastAndroid.show('Ops! something wrong with your data.', ToastAndroid.LONG);
-      }
-    } catch (error) {
-      console.log('error', error)
-    } 
-  }
 
+
+  const onSubmit = async (data: UserDTO) => {
+    if (user.email === data.email && user.password === data.password) {
+      signIn(data)
+    } else {
+      console.log('error')
+      ToastAndroid.show('Ops! something wrong with your data.', ToastAndroid.LONG);
+    }
+  }
   
   return (
     <>
@@ -83,6 +77,7 @@ export default function HandleWithSignIn() {
       <TouchableOpacity 
         style={styles.button}
         onPress={handleSubmit(onSubmit)}
+        disabled={isLoadingUserStorageData}
       >
         <Text style={styles.text}>
           Login

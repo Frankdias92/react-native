@@ -5,29 +5,28 @@ import { useAuth } from "@/hooks/useAuth";
 import HandleWithSignUp from "@/components/login/signUp";
 import HandleWithSignIn from "@/components/login/signIn";
 import { Loading } from "@/components/loading";
-import { storageUserGet } from "@/storage/storageUser";
-import { useEffect } from "react";
+import { TouchableOpacity } from "react-native-gesture-handler";
 
 export default function SignUp() {
-  const { user, isLoadingUserStorageData } = useAuth()
+  const { user, isLoadingUserStorageData, logOut } = useAuth()
 
-  function getUser() {
-    storageUserGet()
-  }
   
   if (isLoadingUserStorageData) {
-    return <Loading  />
+    return (
+      <View style={styles.container}>
+        <Text>sign in</Text>
+        <Loading  />
+      </View>
+    )
   }
 
-  useEffect(() => {
-    getUser()
-  }, [])
   
   return (
     <View style={styles.container}>
       <Text style={styles.text}>{ user.name } | { user.email } | { user.password }</Text>
+      <Text style={styles.text}> value { isLoadingUserStorageData ? <Text>True</Text> : false}</Text>
 
-      { !user.email ? 
+      { user.email ? 
         (
           <HandleWithSignIn />
         ) : (
@@ -35,6 +34,9 @@ export default function SignUp() {
         )
       }
 
+      <TouchableOpacity onPress={logOut}>
+        <Text>Logout</Text>
+      </TouchableOpacity>
     </View>
   )
 }

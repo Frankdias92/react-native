@@ -8,7 +8,7 @@ import { styles } from "./style";
 
 
 export default function HandleWithSignUp() {
-  const { signUp, user } = useAuth()
+  const { signUp } = useAuth()
   
   const {
     control,

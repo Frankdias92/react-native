@@ -1,6 +1,6 @@
 import { router, useFocusEffect } from "expo-router";
 
-import { Alert } from "react-native";
+import { Alert, ToastAndroid } from "react-native";
 import { createContext, ReactNode, useEffect, useState } from "react";
 
 import { UserDTO } from "@/dtos/UserDTO";
@@ -26,21 +26,54 @@ type AuthContextProviderProps = {
 
 export function AuthContextProvider({ children }: AuthContextProviderProps) {
   const [user, setUser] = useState<UserDTO>({} as UserDTO)
-  const [isLoadingUserStorageData, setIsLoadingUserStorage] = useState(true)
+  const [isLoadingUserStorageData, setIsLoadingUserStorage] = useState(false)
   
-  function signIn (data: UserDTO) {
-    if (data.email === user.email && data.password === user.password) {
+  async function storageUserAndToken(user: UserDTO, token: string) {
 
-      router.navigate('/(drawer)')
-    } else {
+  }
+
+
+  const schemaTestUser = {
+    id: '1',
+    name: 'Franklin',
+    email: 'email',
+    password: '123'
+  }
+  function signIn (data: UserDTO) {
+    setUser({} as UserDTO)
+
+    try {
+      setIsLoadingUserStorage(true)
+      if (data.name === schemaTestUser.name) {        
+        ToastAndroid.show('Welcome !', ToastAndroid.TOP);
+      }
+    } catch (error) {
       Alert.alert('Error', 'your password or email are wrong')
+    } finally {
+      setTimeout(() => {
+        setUser(schemaTestUser)
+        // router.navigate('/(drawer)')
+        setIsLoadingUserStorage(false)
+        console.log('timer')
+      }, 2000);
     }
   }
 
+
+
   function signUp(data: UserDTO) {
-    setUser(data)
-    storageUserSave(data)
-    console.log('Account Created')
+    try {
+      setIsLoadingUserStorage(true)
+      setUser(data)
+      storageUserSave(data)
+      console.log('Account Created')
+    } catch (error) {
+      throw error
+    } finally {
+      setTimeout(() => {
+        setIsLoadingUserStorage(false)
+      }, 2000)
+    }
   }
 
   async function logOut() {
