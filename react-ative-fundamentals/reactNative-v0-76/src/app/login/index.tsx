@@ -5,21 +5,19 @@ import { Text, View } from "react-native";
 
 
 export default function Login() {
-  const { signOut } = useAuth()
+  const { logOut } = useAuth()
   const { message } = useGlobalSearchParams()
 
-  console.log('print', message )
 
-  useEffect(() => {
+  useFocusEffect(useCallback(() => {
     if(message === 'false') {
-      console.log('Call the function LogOut')
-      signOut()
+      logOut()
     }
-  })
+  }, [message]))
 
   return (
     <View>
-      <Text>Login Page { message === 'true' ? 'Logado' : 'Log In'}</Text>
+      <Text>Login Page { message === 'true' ? 'Logado' : 'Make a log In'}</Text>
     </View>
   )
 }
