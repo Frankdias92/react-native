@@ -7,7 +7,7 @@ import { useAuth } from "@/src/hooks/useAuth";
 import { UserSignInDTO } from "@/src/dtos/UserDTO";
 
 
-export default function HandleWithSignIn() {
+export function HandleWithSignIn() {
   const { signIn, user, isLoadingUserStorageData } = useAuth()
   
   const {

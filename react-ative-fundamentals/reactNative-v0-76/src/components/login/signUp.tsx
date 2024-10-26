@@ -3,11 +3,11 @@ import { useForm, Controller } from "react-hook-form"
 
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { styles } from "./style";
-import { useAuth } from "@/srchooks/useAuth";
-import { UserDTO } from "@/srcdtos/UserDTO";
+import { useAuth } from "@/src/hooks/useAuth";
+import { UserDTO } from "@/src/dtos/UserDTO";
 
 
-export default function HandleWithSignUp() {
+export function HandleWithSignUp() {
   const { signUp } = useAuth()
   
   const {
@@ -21,30 +21,6 @@ export default function HandleWithSignUp() {
       password: "",
     },
   })
-
-  // const showToast = () => {
-  //   // ToastAndroid.show('A pikachu appeared nearby !', ToastAndroid.SHORT);
-
-  //   // ToastAndroid.showWithGravity(
-  //   //   'All Your Base Are Belong To Us',
-  //   //   ToastAndroid.SHORT,
-  //   //   ToastAndroid.CENTER,
-  //   // );
-
-  //   ToastAndroid.showWithGravity(
-  //     'Test top',
-  //     ToastAndroid.TOP,
-  //     ToastAndroid.CENTER,
-  //   );
-
-  //   // ToastAndroid.showWithGravityAndOffset(
-  //   //   'A wild toast appeared!',
-  //   //   ToastAndroid.LONG,
-  //   //   ToastAndroid.BOTTOM,
-  //   //   25,
-  //   //   50,
-  //   // );
-  // };
   
   const onSubmit = (data: UserDTO) => {
     

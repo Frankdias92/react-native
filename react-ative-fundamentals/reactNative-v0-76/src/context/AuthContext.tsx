@@ -1,12 +1,13 @@
-import { createContext, ReactNode, useCallback, useEffect, useState } from "react"
-import { UserDTO, UserSignInDTO } from "@/srcdtos/UserDTO"
-import { storageAuthTokenGet, storageAuthTokenRemove, storageAuthTokenSave } from "../storage/storageAuthTokens"
-import { StorageUserGet, StorageUserLogOut, StorageUserSave } from "../storage/storageUser"
+import { createContext, ReactNode, useEffect, useState } from "react"
 import { Alert, ToastAndroid } from "react-native"
 import { router } from "expo-router"
 
+import { UserDTO, UserSignInDTO } from "@/dtos/UserDTO"
+import { StorageUserGet, StorageUserLogOut, StorageUserSave } from "@/storage/storageUser"
+import { storageAuthTokenGet, storageAuthTokenRemove, storageAuthTokenSave } from "@/storage/storageAuthTokens"
+
 export type AuthContextDataProps = {
-  user: UserDTO
+  user: UserDTO | UserSignInDTO
   signIn: ( data: UserSignInDTO ) => void
   signUp: ( data: UserDTO ) => void
   logOut: () => void
@@ -20,7 +21,7 @@ type AuthContextProviderProps = {
 }
 
 export function AuthContextProvider({ children }: AuthContextProviderProps) {
-  const [user, setUser] = useState<UserDTO>({} as UserDTO)
+  const [user, setUser] = useState<UserDTO | UserSignInDTO>({} as UserDTO)
   const [isLoadingUserStorageData, setIsLoadingUserStorage] = useState(false)
 
   
@@ -56,6 +57,7 @@ async function storageUserAndTokenSave(userData: UserDTO, token: string) {
 
       if (data.email === schemaTestUser.email) {   
         setIsLoadingUserStorage(true)
+        setUser({email: data.email, password: data.password})
 
         await storageUserAndTokenSave(schemaTestUser, myToken)
         userAndTokenUpdate(schemaTestUser, myToken)

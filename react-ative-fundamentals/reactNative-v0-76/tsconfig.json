@@ -3,13 +3,13 @@
   "compilerOptions": {
     "strict": true,
     "paths": {
-      "@/src*": ["./src/*"],
-      "@/app*": ["./src/app/*"],
-      "@/components*": ["./src/app/components/*"],
-      "@/context*": ["./src/app/context/*"],
-      "@/hooks*": ["./src/app/hooks/*"],
-      "@/dtos*": ["./src/app/dtos/*"],
-      "@/storage*": ["./src/app/storage/*"],
+      "@/src/*": ["./src/*"],
+      "@/app/*": ["./src/app/*"],
+      "@/components/*": ["./src/components/*"],
+      "@/context/*": ["./src/context/*"],
+      "@/hooks/*": ["./src/hooks/*"],
+      "@/dtos/*": ["./src/dtos/*"],
+      "@/storage/*": ["./src/storage/*"],
     }
   },
   "include": [
