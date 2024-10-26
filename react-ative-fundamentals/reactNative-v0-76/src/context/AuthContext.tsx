@@ -1,5 +1,5 @@
 import { createContext, ReactNode, useCallback, useEffect, useState } from "react"
-import { UserDTO } from "../dtos/UserDTO"
+import { UserDTO, UserSignInDTO } from "@/srcdtos/UserDTO"
 import { storageAuthTokenGet, storageAuthTokenRemove, storageAuthTokenSave } from "../storage/storageAuthTokens"
 import { StorageUserGet, StorageUserLogOut, StorageUserSave } from "../storage/storageUser"
 import { Alert, ToastAndroid } from "react-native"
@@ -7,7 +7,7 @@ import { router } from "expo-router"
 
 export type AuthContextDataProps = {
   user: UserDTO
-  signIn: ( data: UserDTO ) => void
+  signIn: ( data: UserSignInDTO ) => void
   signUp: ( data: UserDTO ) => void
   logOut: () => void
   isLoadingUserStorageData: boolean
@@ -50,11 +50,11 @@ async function storageUserAndTokenSave(userData: UserDTO, token: string) {
   }
 }
 
-  async function signIn (data: UserDTO) {
+  async function signIn (data: UserSignInDTO) {
     try {
       const myToken = '123456'
 
-      if (data.name === schemaTestUser.name) {   
+      if (data.email === schemaTestUser.email) {   
         setIsLoadingUserStorage(true)
 
         await storageUserAndTokenSave(schemaTestUser, myToken)
