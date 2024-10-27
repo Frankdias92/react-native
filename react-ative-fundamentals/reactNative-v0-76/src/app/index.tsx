@@ -15,24 +15,26 @@ export default function Login() {
   const { user, isLoadingUserStorageData, logOut } = useAuth()
   const { message } = useGlobalSearchParams()
 
-  if (isLoadingUserStorageData === true) {
+  if (isLoadingUserStorageData) {
     return (
       <View className="flex-1 justify-center items-center">
+        <Text>sign in</Text>
         <Loading  />
       </View>
     )
   }
 
-  useFocusEffect(useCallback(() => {
-    if(message === 'false') {
-      // logOut()
-      console.log('print message', message)
-      // console.log('user:', user)
-    }
-  }, [message]))
+  // useFocusEffect(useCallback(() => {
+  //   if(message === 'false') {
+  //     // logOut()
+  //     console.log('print message', message)
+  //     // console.log('user:', user)
+  //   }
+  // }, [message]))
+
 
   return (
-    <View className="flex-1 justify-start items-center mt-52">
+    <View className="flex-1 justify-start items-center mt-52 gap-4 px-8">
       {/* <Suspense fallback={<Loading/>}> */}
         { user.email ?
           (
@@ -42,7 +44,7 @@ export default function Login() {
           ) 
         }
 
-      {/* </Suspense> */} 
+      {/* </Suspense>  */}
         <TouchableOpacity onPress={logOut}>
           <Text>LogOut</Text>
         </TouchableOpacity>

@@ -63,7 +63,7 @@ async function storageUserAndTokenSave(userData: UserDTO, token: string) {
         userAndTokenUpdate(schemaTestUser, myToken)
         
         ToastAndroid.show('Welcome !', ToastAndroid.TOP);
-        router.navigate('/(drawer)')
+        router.navigate('/home')
       }
     } catch (error) {
       Alert.alert('Error', 'your password or email are wrong')
@@ -100,7 +100,7 @@ async function storageUserAndTokenSave(userData: UserDTO, token: string) {
       throw error
       
     } finally {
-      router.navigate('/login')
+      router.navigate('/')
       setIsLoadingUserStorage(false)
     }
   }
@@ -113,7 +113,7 @@ async function storageUserAndTokenSave(userData: UserDTO, token: string) {
   
       if (userLogged && token) {
         userAndTokenUpdate(userLogged, token)
-        router.navigate('/(drawer)')
+        router.navigate('/')
       }
 
     } catch (error) {
@@ -139,7 +139,7 @@ async function storageUserAndTokenSave(userData: UserDTO, token: string) {
         isLoadingUserStorageData
       }}
     >
-        { children }
+      { children }
     </AuthContext.Provider>
   )
 }

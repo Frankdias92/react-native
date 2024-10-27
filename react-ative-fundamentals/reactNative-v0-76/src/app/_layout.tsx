@@ -1,13 +1,21 @@
-import { Stack } from "expo-router";
+import { Slot, Stack } from "expo-router";
 import { AuthContextProvider } from "../context/AuthContext";
+import { Drawer } from 'expo-router/drawer'
 
 import '../../global.css'
-import Login from "./user";
+import { View } from "react-native";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
 
 export default function RootLayout() {
   return (
     <AuthContextProvider >
-      <Stack initialRouteName="user/index"/>
+      <GestureHandlerRootView style={{ flex: 1 }} >
+        <View className="flex-1 bg-slate-950 color-neutral-100">
+          <Slot initialRouteName="index" screenOptions={{
+            headerShown: false
+          }}/>
+        </View>
+      </GestureHandlerRootView>
     </AuthContextProvider>
   )
 }

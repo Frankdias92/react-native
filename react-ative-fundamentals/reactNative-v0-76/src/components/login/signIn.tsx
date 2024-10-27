@@ -5,6 +5,8 @@ import { useForm, Controller } from "react-hook-form"
 import { styles } from "./style";
 import { useAuth } from "@/src/hooks/useAuth";
 import { UserSignInDTO } from "@/src/dtos/UserDTO";
+import { InputForm } from "../inputForm";
+import { ButtonText } from "../buttonText";
 
 
 export function HandleWithSignIn() {
@@ -40,13 +42,14 @@ export function HandleWithSignIn() {
           required: true
         }}
         render={({ field: { onChange, onBlur, value } }) => (
-          <TextInput
-            placeholder="Email"
+          <InputForm 
+            onChange={onChange}
             onBlur={onBlur}
-            onChangeText={onChange}
             value={value}
-            placeholderTextColor={'#999999'}
-            style={styles.input}
+            errors={errors}
+
+            placeholder="Email"
+            textContentType='name'
           />
         )}
         name="email"
@@ -60,28 +63,25 @@ export function HandleWithSignIn() {
           required: true
         }}
         render={({ field: { onChange, onBlur, value } }) => (
-          <TextInput
-            placeholder="Password"
+          <InputForm 
+            onChange={onChange}
             onBlur={onBlur}
-            onChangeText={onChange}
             value={value}
-            placeholderTextColor={'#999999'}
-            style={styles.input}
+            errors={errors}
+
+            placeholder="Password"
+            textContentType='emailAddress'
           />
         )}
         name="password"
       />
       {errors.password && <Text style={styles.textAlert}>Password is required</Text>}
 
-      <TouchableOpacity 
-        style={styles.button}
+      <ButtonText
+        text="Login"
         onPress={handleSubmit(onSubmit)}
-        disabled={isLoadingUserStorageData}
-      >
-        <Text style={styles.text}>
-          Login
-        </Text>
-      </TouchableOpacity>
+        variante="lime-500"
+      />
     </>
   )
 }

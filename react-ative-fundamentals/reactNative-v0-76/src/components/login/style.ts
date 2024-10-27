@@ -18,7 +18,7 @@ export const styles = StyleSheet.create({
     borderRadius: 8,
     color: '#fff',
     borderWidth: 2,
-    borderColor: '#999999'
+    borderColor: '#999999',
   },
   button: {
     backgroundColor: '#6B38FB',

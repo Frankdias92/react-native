@@ -5,6 +5,8 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 import { styles } from "./style";
 import { useAuth } from "@/src/hooks/useAuth";
 import { UserDTO } from "@/src/dtos/UserDTO";
+import { InputForm } from "../inputForm";
+import { ButtonText } from "../buttonText";
 
 
 export function HandleWithSignUp() {
@@ -43,14 +45,14 @@ export function HandleWithSignUp() {
           required: true,
         }}
         render={({ field: { onChange, onBlur, value } }) => (
-          <TextInput
-            placeholder="First name"
+          <InputForm 
+            onChange={onChange}
             onBlur={onBlur}
-            textContentType="name"
-            onChangeText={onChange}
             value={value}
-            placeholderTextColor={'#999999'}
-            style={styles.input}
+            errors={errors}
+
+            placeholder="Name"
+            textContentType='name'
           />
         )}
         name="name"
@@ -64,14 +66,14 @@ export function HandleWithSignUp() {
           required: true
         }}
         render={({ field: { onChange, onBlur, value } }) => (
-          <TextInput
-            placeholder="Email"
-            textContentType="emailAddress"
+          <InputForm 
+            onChange={onChange}
             onBlur={onBlur}
-            onChangeText={onChange}
             value={value}
-            placeholderTextColor={'#999999'}
-            style={styles.input}
+            errors={errors}
+
+            placeholder="Your Email"
+            textContentType='emailAddress'
           />
         )}
         name="email"
@@ -85,27 +87,25 @@ export function HandleWithSignUp() {
           required: true
         }}
         render={({ field: { onChange, onBlur, value } }) => (
-          <TextInput
-            placeholder="Password"
-            textContentType="password"
+          <InputForm 
+            onChange={onChange}
             onBlur={onBlur}
-            onChangeText={onChange}
             value={value}
-            placeholderTextColor={'#999999'}
-            style={styles.input}
-            // onSubmitEditing={}
+            errors={errors}
+
+            placeholder="Password"
+            textContentType='password'
           />
         )}
         name="password"
       />
       {errors.password && <Text style={styles.textAlert}>Password is required</Text>}
 
-      <TouchableOpacity 
-        style={styles.button}
+      <ButtonText 
+        text="Submit"
         onPress={handleSubmit(onSubmit)}
-      >
-        <Text style={styles.text}>Submit</Text>
-      </TouchableOpacity>
+        variante="lime-500"
+      />
 
     </>
   )
