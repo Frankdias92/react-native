@@ -10,6 +10,7 @@ import Login from '@/src/app';
 import Profile from '@/src/app/(drawer)/user';
 import Home from '@/src/app/(drawer)/home';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import { AvatarDrawer } from '@/src/components/drawer/profile/avatar';
 
 const Drawer = createDrawerNavigator() 
 
@@ -47,17 +48,7 @@ export default function DrawerLayout() {
             drawerLabel: 'Profile',
             drawerActiveBackgroundColor: 'transparent',
             drawerIcon: ({ color, size }) => (
-              <View className='flex flex-row gap-6 w-full h-32 justify-start items-center relative'>
-                <Image 
-                  source={{uri:'https://www.github.com/frankdias92.png'}}
-                  className='flex size-24 rounded-full border-lime-500 border-2'
-                />
-                <View>
-                  <Text className='text-xl font-medium color-stone-900'>Franklin</Text>
-                  <Text className='text-lg font-light color-neutral-700'>your@email.com</Text>
-                </View>
-                <View className='w-full h-0.5 bg-stone-900 absolute bottom-0'/>
-              </View>
+              <AvatarDrawer />
             )
           }}
           listeners={{drawerItemPress: () => console.log('click')}}
