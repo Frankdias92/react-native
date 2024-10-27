@@ -10,7 +10,7 @@ export default function RootLayout() {
   return (
     <AuthContextProvider >
       <GestureHandlerRootView style={{ flex: 1 }} >
-        <View className="flex-1 bg-slate-950 color-neutral-100">
+        <View className="flex-1 bg-slate-950">
           <Slot initialRouteName="index" screenOptions={{
             headerShown: false
           }}/>

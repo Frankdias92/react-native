@@ -10,7 +10,9 @@ interface ButtonTextProps {
 export function ButtonText({ text, onPress, variante, ...rest }: ButtonTextProps) {
   return (
     <TouchableOpacity 
-        className={`flex w-full py-4 px-2 bg-${variante} rounded-lg`}
+        className={`flex w-full py-4 px-2  rounded-lg
+          ${variante === 'lime-500' ? 'bg-lime-500' : 'bg-slate-100'}
+        `}
         onPress={onPress}
         {...rest}
       >

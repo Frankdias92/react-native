@@ -7,22 +7,21 @@ import { router } from 'expo-router';
 import { useAuth } from '@/hooks/useAuth';
 
 import Login from '@/src/app';
-import Profile from '@/src/app/home/(drawer)/user';
-import Home from '@/src/app/home';
+import Profile from '@/src/app/(drawer)/user';
+import Home from '@/src/app/(drawer)/home';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
 const Drawer = createDrawerNavigator() 
 
 export default function DrawerLayout() {
-  const { user } = useAuth()
-  // const [userLogged, setUserLogged] = useState(false)
+  const { user, logOut } = useAuth()
 
   function testUser() {
-    if (!user) {
-      // router.navigate('/(drawer)')
-      router.navigate('/home/(drawer)/user')
+    if (user) {
+      logOut()
+      console.log('print function testUser', user)
     } else {
-      console.log(user)
+      router.navigate('/')
     }
   }
   
@@ -32,16 +31,16 @@ export default function DrawerLayout() {
         initialRouteName='home/(drawer)/index'
         screenOptions={{
           headerShown: false,
-          drawerActiveBackgroundColor: '#999',
-          drawerActiveTintColor: '#44403c',
+          drawerActiveBackgroundColor: '#1c1917',
+          drawerActiveTintColor: '#eee',
           drawerContentContainerStyle: {
             flex: 1,
-            backgroundColor: '#C3C3C3',
+            backgroundColor: '#a3e635',
           }
         }} 
       >
         {/* Profile */}
-        {/* <Drawer.Screen
+        <Drawer.Screen
           name="login/profile/index"          
           component={Profile}
           options={{
@@ -51,22 +50,22 @@ export default function DrawerLayout() {
               <View className='flex flex-row gap-6 w-full h-32 justify-start items-center relative'>
                 <Image 
                   source={{uri:'https://www.github.com/frankdias92.png'}}
-                  className='flex size-24 rounded-full border-green-500 border-2'
+                  className='flex size-24 rounded-full border-lime-500 border-2'
                 />
                 <View>
-                  <Text className='text-xl font-medium color-stone-700'>Franklin</Text>
-                  <Text className='text-lg font-light color-stone-500'>your@email.com</Text>
+                  <Text className='text-xl font-medium color-stone-900'>Franklin</Text>
+                  <Text className='text-lg font-light color-neutral-700'>your@email.com</Text>
                 </View>
-                <View className='w-full h-0.5 bg-stone-400 absolute bottom-0'/>
+                <View className='w-full h-0.5 bg-stone-900 absolute bottom-0'/>
               </View>
             )
           }}
           listeners={{drawerItemPress: () => console.log('click')}}
-        /> */}
+        />
 
         {/* Home */}
         <Drawer.Screen
-          name="home/(drawer)/user/index"          
+          name="(drawer)/index"          
           component={Home}
           options={{
             drawerLabel: 'Home',
@@ -81,8 +80,8 @@ export default function DrawerLayout() {
           listeners={{drawerItemPress: () => console.log('click')}}
         />
 
-        {/* Login  */}
-        {/* <Drawer.Screen
+        {/* Login Button  */}
+        <Drawer.Screen
           name="index"   
           component={Login}
           initialParams={{ message: user }}
@@ -117,7 +116,7 @@ export default function DrawerLayout() {
               }
             }
           }}
-        /> */}
+        />
       </Drawer.Navigator>
     </GestureHandlerRootView>
   )

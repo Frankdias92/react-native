@@ -7,10 +7,12 @@ import { useAuth } from "@/src/hooks/useAuth";
 import { UserSignInDTO } from "@/src/dtos/UserDTO";
 import { InputForm } from "../inputForm";
 import { ButtonText } from "../buttonText";
+import { useEffect } from "react";
+import { router } from "expo-router";
 
 
 export function HandleWithSignIn() {
-  const { signIn, user, isLoadingUserStorageData } = useAuth()
+  const { signIn, user } = useAuth()
   
   const {
     control,
@@ -32,6 +34,14 @@ export function HandleWithSignIn() {
       ToastAndroid.show('Ops! something wrong with your data.', ToastAndroid.LONG);
     }
   }
+
+  useEffect(() => {
+    if(user) {
+      router.replace('/(drawer)')
+    } else {
+      console.log('print user', user)
+    }
+  }, [user])
   
   return (
     <>

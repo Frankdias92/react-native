@@ -1,7 +1,6 @@
 import { Text, View } from "react-native";
-import { Suspense, useCallback, useEffect } from "react";
 
-import { useFocusEffect, useGlobalSearchParams } from "expo-router";
+import { useGlobalSearchParams } from "expo-router";
 
 import { useAuth } from "@/src/hooks/useAuth";
 import { Loading } from "@/src/components/loading";
@@ -18,23 +17,16 @@ export default function Login() {
   if (isLoadingUserStorageData) {
     return (
       <View className="flex-1 justify-center items-center">
-        <Text>sign in</Text>
         <Loading  />
       </View>
     )
   }
 
-  // useFocusEffect(useCallback(() => {
-  //   if(message === 'false') {
-  //     // logOut()
-  //     console.log('print message', message)
-  //     // console.log('user:', user)
-  //   }
-  // }, [message]))
+  
 
 
   return (
-    <View className="flex-1 justify-start items-center mt-52 gap-4 px-8">
+    <View className="flex-1 justify-start items-center pt-52 gap-4 px-8 bg-slate-950">
       {/* <Suspense fallback={<Loading/>}> */}
         { user.email ?
           (
