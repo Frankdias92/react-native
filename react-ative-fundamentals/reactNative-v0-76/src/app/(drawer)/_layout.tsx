@@ -32,13 +32,13 @@ export default function DrawerLayout() {
         initialRouteName='home/(drawer)/index'
         screenOptions={{
           headerShown: false,
-          drawerActiveBackgroundColor: '#1c1917',
-          drawerActiveTintColor: '#eee',
+          drawerActiveBackgroundColor: '#1c1917', // stone 900
+          drawerActiveTintColor: '#fafaf9', // stone 50
           drawerContentContainerStyle: {
             flex: 1,
-            backgroundColor: '#a3e635',
+            backgroundColor: '#a3e635', // lime 400
           }
-        }} 
+        }}
       >
         {/* Profile */}
         <Drawer.Screen
@@ -77,9 +77,7 @@ export default function DrawerLayout() {
           component={Login}
           initialParams={{ message: user }}
           options={{
-            drawerLabel: () => (
-              <Text >{ !user ? 'LogIn' : 'SignOut'}</Text>
-            ),
+            drawerLabel: !user ? 'LogIn' : 'SignOut',
             drawerIcon: ({ color, size }) => (
               <MaterialIcons 
                 name={ !user ? 'login' : 'logout' }

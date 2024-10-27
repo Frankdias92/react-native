@@ -57,13 +57,12 @@ async function storageUserAndTokenSave(userData: UserDTO, token: string) {
 
       if (data.email === schemaTestUser.email) {   
         setIsLoadingUserStorage(true)
-        setUser({email: data.email, password: data.password})
+        setUser(schemaTestUser)
 
         await storageUserAndTokenSave(schemaTestUser, myToken)
         userAndTokenUpdate(schemaTestUser, myToken)
         
         ToastAndroid.show('Welcome !', ToastAndroid.TOP);
-        // router.navigate('/home')
       }
     } catch (error) {
       Alert.alert('Error', 'your password or email are wrong')
@@ -116,7 +115,6 @@ async function storageUserAndTokenSave(userData: UserDTO, token: string) {
       if (userLogged && token) {
           userAndTokenUpdate(userLogged, token)
         }
-        console.log(userLogged, token)
         
       } catch (error) {
         console.error(error)
@@ -129,7 +127,6 @@ async function storageUserAndTokenSave(userData: UserDTO, token: string) {
   }
 
   useEffect(() => {
-    console.log('print data user', user)
     loadUserData()
   }, [])
   

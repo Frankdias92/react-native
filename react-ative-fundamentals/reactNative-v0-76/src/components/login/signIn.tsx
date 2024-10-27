@@ -9,6 +9,7 @@ import { InputForm } from "../inputForm";
 import { ButtonText } from "../buttonText";
 import { useEffect } from "react";
 import { router } from "expo-router";
+import { StorageUserGet } from "@/src/storage/storageUser";
 
 
 export function HandleWithSignIn() {
@@ -35,13 +36,6 @@ export function HandleWithSignIn() {
     }
   }
 
-  useEffect(() => {
-    if(user) {
-      router.replace('/(drawer)')
-    } else {
-      console.log('print user', user)
-    }
-  }, [user])
   
   return (
     <>
