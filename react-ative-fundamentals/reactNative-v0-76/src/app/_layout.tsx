@@ -1,21 +1,22 @@
-import { Slot, Stack } from "expo-router";
-import { AuthContextProvider } from "../context/AuthContext";
-import { Drawer } from 'expo-router/drawer'
+import { AuthContextProvider } from '../context/AuthContext';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import { View } from 'react-native';
+import { useState } from 'react';
+
+import { Stack } from 'expo-router';
 
 import '../../global.css'
-import { View } from "react-native";
-import { GestureHandlerRootView } from "react-native-gesture-handler";
 
 export default function RootLayout() {
+  const [layouts, setLayout] = useState(false);
+
   return (
-    <AuthContextProvider >
-      <GestureHandlerRootView style={{ flex: 1 }} >
-        <View className="flex-1 bg-slate-950">
-          <Slot initialRouteName="index" screenOptions={{
-            headerShown: false
-          }}/>
-        </View>
-      </GestureHandlerRootView>
+    <AuthContextProvider>
+      <View className="flex-1 bg-slate-950">
+        <GestureHandlerRootView style={{ flex: 1 }} >
+          <Stack screenOptions={{ headerShown: false }} />
+        </GestureHandlerRootView>
+      </View>
     </AuthContextProvider>
-  )
+  );
 }

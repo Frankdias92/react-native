@@ -1,10 +1,7 @@
+import { router } from "expo-router"
 import { Text, View } from "react-native"
 
 
 export default function Configs() {
-  return (
-    <View>
-      <Text>Configs Drawer</Text>
-    </View>
-  )
+  return router.navigate("/")
 }

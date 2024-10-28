@@ -1,35 +1,33 @@
 
-import { createDrawerNavigator } from '@react-navigation/drawer';
-import { Alert, Image, Text, View } from 'react-native';
+import { Alert } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons'
 import { router } from 'expo-router';
+import { Drawer } from 'expo-router/drawer'
 
 import { useAuth } from '@/hooks/useAuth';
 
 import Login from '@/src/app';
-import Profile from '@/src/app/(drawer)/user';
-import Home from '@/src/app/(drawer)/home';
+import Profile from '@/src/app/(drawer)/(tabs)/user';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { AvatarDrawer } from '@/src/components/drawer/profile/avatar';
+import TabsHome from './(tabs)';
 
-const Drawer = createDrawerNavigator() 
 
 export default function DrawerLayout() {
   const { user, logOut } = useAuth()
 
-  function testUser() {
+  function userLogOut() {
     if (user) {
       logOut()
+      router.navigate('/')
       console.log('print function testUser', user)
     } else {
-      router.navigate('/')
     }
   }
   
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
-      <Drawer.Navigator 
-        initialRouteName='home/(drawer)/index'
+      <Drawer
         screenOptions={{
           headerShown: false,
           drawerActiveBackgroundColor: '#1c1917', // stone 900
@@ -39,11 +37,10 @@ export default function DrawerLayout() {
             backgroundColor: '#a3e635', // lime 400
           }
         }}
-      >
-        {/* Profile */}
+      >     
+        {/* Profile Avatar */}
         <Drawer.Screen
-          name="login/profile/index"          
-          component={Profile}
+          name="profile"
           options={{
             drawerLabel: 'Profile',
             drawerActiveBackgroundColor: 'transparent',
@@ -51,20 +48,19 @@ export default function DrawerLayout() {
               <AvatarDrawer />
             )
           }}
-          listeners={{drawerItemPress: () => console.log('click')}}
+          listeners={{drawerItemPress: () => router.navigate('/(drawer)/(tabs)/user')}}
         />
 
         {/* Home */}
         <Drawer.Screen
-          name="(drawer)/index"          
-          component={Home}
+          name="(tabs)"
           options={{
             drawerLabel: 'Home',
             drawerIcon: ({ color, size }) => (
               <MaterialIcons 
-              name='home'
-              size={size}
-              color={color}
+                name='home'
+                size={size}
+                color={color}
               />
             )
           }}
@@ -73,8 +69,7 @@ export default function DrawerLayout() {
 
         {/* Login Button  */}
         <Drawer.Screen
-          name="index"   
-          component={Login}
+          name="config"   
           initialParams={{ message: user }}
           options={{
             drawerLabel: !user ? 'LogIn' : 'SignOut',
@@ -98,15 +93,15 @@ export default function DrawerLayout() {
                   },
                   {
                     text: 'Leave',
-                    onPress: () => testUser()
+                    onPress: () => userLogOut()
                   }
                 ])
-                : testUser()
+                : userLogOut()
               }
             }
           }}
-        />
-      </Drawer.Navigator>
+        /> 
+      </Drawer>
     </GestureHandlerRootView>
   )
 }

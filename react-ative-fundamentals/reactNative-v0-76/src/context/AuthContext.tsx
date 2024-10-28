@@ -68,6 +68,7 @@ async function storageUserAndTokenSave(userData: UserDTO, token: string) {
       Alert.alert('Error', 'your password or email are wrong')
     } finally {
       setTimeout(() => {
+        router.navigate('/(drawer)/(tabs)/user')
         setIsLoadingUserStorage(false)
       }, 2000)
     }
@@ -120,7 +121,6 @@ async function storageUserAndTokenSave(userData: UserDTO, token: string) {
         console.error(error)
       } finally {
         setTimeout(() => {
-        router.navigate('/(drawer)')
         setIsLoadingUserStorage(false)
       }, 2000)
     }

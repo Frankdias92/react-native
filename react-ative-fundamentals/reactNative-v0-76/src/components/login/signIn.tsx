@@ -1,5 +1,4 @@
-import { TouchableOpacity } from "react-native-gesture-handler";
-import { Text, TextInput, ToastAndroid } from "react-native"
+import { Text, ToastAndroid } from "react-native"
 import { useForm, Controller } from "react-hook-form"
 
 import { styles } from "./style";
@@ -7,9 +6,6 @@ import { useAuth } from "@/src/hooks/useAuth";
 import { UserSignInDTO } from "@/src/dtos/UserDTO";
 import { InputForm } from "../inputForm";
 import { ButtonText } from "../buttonText";
-import { useEffect } from "react";
-import { router } from "expo-router";
-import { StorageUserGet } from "@/src/storage/storageUser";
 
 
 export function HandleWithSignIn() {

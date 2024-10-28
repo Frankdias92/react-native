@@ -1,7 +1,6 @@
-import { Text, TextInput, Alert } from "react-native"
+import { Text, Alert } from "react-native"
 import { useForm, Controller } from "react-hook-form"
 
-import { TouchableOpacity } from "react-native-gesture-handler";
 import { styles } from "./style";
 import { useAuth } from "@/src/hooks/useAuth";
 import { UserDTO } from "@/src/dtos/UserDTO";
