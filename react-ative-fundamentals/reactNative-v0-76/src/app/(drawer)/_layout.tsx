@@ -18,8 +18,8 @@ export default function DrawerLayout() {
 
   function userLogOut() {
     if (user) {
-      logOut()
-      router.navigate('/')
+      // logOut()
+      router.navigate('/config')
       console.log('print function testUser', user)
     } else {
     }

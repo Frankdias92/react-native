@@ -15,6 +15,11 @@ export default function Home() {
       <Suspense fallback={<Loading />}>
         <Text className="color-gray-100 text-2xl font-semibold">Page Home</Text>
       </Suspense>
+
+      <TouchableOpacity onPress={() => router.navigate('/(drawer)/(tabs)/product/12')}>
+        <Text className="color-slate-400">Go to products</Text>
+      </TouchableOpacity>
+      
       <TouchableOpacity onPress={test}>
         <Text className="color-slate-400">Go to login</Text>
       </TouchableOpacity>
