@@ -29,6 +29,7 @@
     "expo-system-ui": "~3.0.7",
     "expo-web-browser": "~13.0.3",
     "nativewind": "^4.1.21",
+    "prisma": "^5.21.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-hook-form": "^7.53.1",
