@@ -1,112 +1,21 @@
-import { ButtonText } from "@/src/components/buttonText";
-import { InputForm } from "@/src/components/inputForm";
-import { UserProfile } from "@/src/components/userProfile";
-import { UserDTO } from "@/src/dtos/UserDTO";
-import { useEffect, useState } from "react";
-import { Controller, useForm } from "react-hook-form";
 import { Text, View } from "react-native";
-
-
-type FormDataProps = {
-  name: string;
-  email: string;
-  password: string;
-  password_confirm: string
-}
+import ControllerProfile from "@/src/components/user/controllerProfile";
+import { useState } from "react";
+import { ButtonText } from "@/src/components/buttonText";
+import { router } from "expo-router";
 
 
 export default function Profile() {
-  const [submittedData, setSubmittedData] = useState<FormDataProps>({} as FormDataProps)
-  const { control, handleSubmit, formState: { errors }} = useForm<FormDataProps>()
-
-  const onSubmit = (data: FormDataProps) => {
-    
-    setSubmittedData(data)
-  }
-  
-  useEffect(() => {
-    console.log('Submitted Data', submittedData)
-  }, [submittedData])
+  const [editProfile, setEditProfile] = useState(false)
   
   return (
-    <View className="flex-1 justify-center items-center bg-slate-900 px-8 gap-4">
-      <View>
-        <UserProfile />
+    <View className="flex h-full w-full justify-center items-start bg-slate-900 px-8">
+      <View className="flex w-full h-full">
+        <ControllerProfile />
       </View>
 
-      <Controller 
-        name="name"
-        control={control}
-        render={({ field: {onChange, value, onBlur} }) => (
-          <InputForm 
-            placeholder="Name"
-            textContentType="name"
-            onBlur={onBlur}
-            onChange={onChange}
-            value={value}
-            errors={errors}
-          />
-        )} 
-        rules={{ required: 'You must enter with a value'}}
-      />
-      
-      <Controller 
-        name="email"
-        control={control}
-        render={({ field: {onChange, value, onBlur} }) => (
-          <InputForm 
-            placeholder='E-mail' 
-            textContentType='emailAddress'
-            onBlur={onBlur}
-            onChange={onChange}
-            value={value}
-            // errors={errors.email?.message}
-            errors={errors}
-          />
-        )}
-        rules={{ required: 'you must enter with your email' }}
-      />
+      <ButtonText text="Voltar" variante="lime-500" onPress={() => router.navigate('/(drawer)/(tabs)/')} />
 
-      <Controller 
-        name="password"
-        control={control}
-        render={({ field: {value, onBlur, onChange}}) => (
-          <InputForm 
-            placeholder='password'
-            textContentType='password'
-            onBlur={onBlur}
-            onChange={onChange}
-            value={value}
-            // errors={errors.email?.message}
-            errors={errors}
-          />
-        )}
-        rules={{ required: 'you must enter with you password'}}
-      />
-
-      <Controller 
-        name="password_confirm"
-        control={control}
-        render={({ field: {onChange, value, onBlur}}) => (
-          <InputForm 
-            placeholder='password'
-            textContentType='password'
-            onBlur={onBlur}
-            onChange={onChange}
-            value={value}
-            // errors={errors.email?.message}
-            errors={errors}
-          />
-        )}
-      />
-
-      <ButtonText text="Update profile" variante="lime-500" onPress={handleSubmit(onSubmit)} />
-
-      { submittedData && (
-        <Text className="color-slate-100">{submittedData.email}</Text>
-      )}
-
-      <Text className="font-medium text-slate-100">Profile User</Text>
     </View>
   )
 }

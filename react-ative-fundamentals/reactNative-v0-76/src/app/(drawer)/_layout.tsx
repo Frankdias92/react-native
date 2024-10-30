@@ -40,15 +40,14 @@ export default function DrawerLayout() {
       >     
         {/* Profile Avatar */}
         <Drawer.Screen
-          name="profile"
+          name="ProfileRoot"
           options={{
-            drawerLabel: 'Profile',
-            drawerActiveBackgroundColor: 'transparent',
+            drawerActiveBackgroundColor: '#red',
             drawerIcon: ({ color, size }) => (
               <AvatarDrawer />
             )
           }}
-          listeners={{drawerItemPress: () => router.navigate('/(drawer)/(tabs)/user')}}
+          listeners={{drawerItemPress: () => router.navigate('/(tabs)/user')}}
         />
 
         {/* Home */}
@@ -64,7 +63,7 @@ export default function DrawerLayout() {
               />
             )
           }}
-          listeners={{drawerItemPress: () => console.log('click')}}
+          listeners={{drawerItemPress: () => router.navigate('/(drawer)/(tabs)/')}}
         />
 
         {/* Login Button  */}

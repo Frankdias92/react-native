@@ -12,7 +12,7 @@ import { HandleWithSignIn } from "@/src/components/login/signIn";
 import { TouchableOpacity } from "react-native-gesture-handler";
 
 
-export default function Index() {
+export default function Login() {
   const { user, isLoadingUserStorageData, logOut } = useAuth()
   // const [newUser, setNewUser] = useState(false)
 
@@ -34,7 +34,7 @@ export default function Index() {
 
   return (
     <View className="flex-1 justify-start items-center pt-52 gap-4 px-8 bg-slate-950">
-      {/* <Suspense fallback={<Loading/>}>
+      <Suspense fallback={<Loading/>}>
         { user.email ?
           (
             <HandleWithSignIn />
@@ -42,13 +42,13 @@ export default function Index() {
             <HandleWithSignUp />
           ) 
         }
-      </Suspense>  */}
+      </Suspense> 
         <TouchableOpacity onPress={logOut}>
           <Text className="text-white">LogOut</Text>
         </TouchableOpacity>
 
         <Link
-          href={'/logIn'} 
+          href={'/(drawer)/(tabs)'} 
           className="text-white"
         >
           HOME
