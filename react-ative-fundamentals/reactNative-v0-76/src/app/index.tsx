@@ -1,20 +1,16 @@
-import { Text, View } from "react-native";
+import { View } from "react-native";
 
-import { Link, router, useFocusEffect } from "expo-router";
+import { router } from "expo-router";
 
 import { useAuth } from "@/src/hooks/useAuth";
 import { Loading } from "@/src/components/loading";
 
-import { Suspense, useCallback } from "react";
-
-import { HandleWithSignUp } from "@/src/components/login/signUp";
-import { HandleWithSignIn } from "@/src/components/login/signIn";
-import { TouchableOpacity } from "react-native-gesture-handler";
+import { Suspense } from "react";
+import Login from "./logIn";
 
 
 export default function Index() {
   const { user, isLoadingUserStorageData, logOut } = useAuth()
-  // const [newUser, setNewUser] = useState(false)
 
   if (isLoadingUserStorageData) {
     return (
@@ -23,36 +19,16 @@ export default function Index() {
       </View>
     )
   }
-  
-  // useFocusEffect(useCallback(() => {
-  //   if(user) {
-  //     router.navigate('/(drawer)/home')
-  //   }
-  // }, []))
 
-
+  if (user.email) {
+    router.navigate('/(drawer)/(tabs)') 
+  }
 
   return (
-    <View className="flex-1 justify-start items-center pt-52 gap-4 px-8 bg-slate-950">
-      {/* <Suspense fallback={<Loading/>}>
-        { user.email ?
-          (
-            <HandleWithSignIn />
-          ) : (
-            <HandleWithSignUp />
-          ) 
-        }
-      </Suspense>  */}
-        <TouchableOpacity onPress={logOut}>
-          <Text className="text-white">LogOut</Text>
-        </TouchableOpacity>
-
-        <Link
-          href={'/logIn'} 
-          className="text-white"
-        >
-          HOME
-        </Link>
+    <View className="flex-1 justify-start items-center gap-4 px-8 bg-slate-950">
+      <Suspense fallback={<Loading />}>
+        <Login />
+      </Suspense>
         
     </View>
   )

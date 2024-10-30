@@ -1,8 +1,11 @@
+import { useAuth } from '@/src/hooks/useAuth';
 import { MaterialIcons } from '@expo/vector-icons';
 import { Tabs } from 'expo-router';
 
 
 export default function TabsLayout() {
+  const { user } = useAuth()
+  
   return (
       <Tabs
         screenOptions={{
@@ -19,9 +22,12 @@ export default function TabsLayout() {
           tabBarLabel: 'Home',
           tabBarIcon: ({ color, size }) => <MaterialIcons name='home' color={color} size={size}/>
         }}/>
-        <Tabs.Screen name="user" options={{
-          tabBarIcon: ({ color, size }) => <MaterialIcons name='person' color={color} size={size}/>
-        }}/>
+        {user.email ? (
+            <Tabs.Screen name="user" options={{
+              tabBarIcon: ({ color, size }) => <MaterialIcons name='person' color={color} size={size}/>
+            }}/>
+          ) : <Tabs.Screen name="user" options={{ tabBarButton: () => null }}/>
+        }
         <Tabs.Screen name="settings" options={{
           tabBarIcon: ({ color, size }) => <MaterialIcons name='settings' color={color} size={size}/>
         }}/>

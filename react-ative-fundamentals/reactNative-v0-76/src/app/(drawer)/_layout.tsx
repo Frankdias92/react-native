@@ -1,7 +1,7 @@
 
 import { Alert } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons'
-import { router } from 'expo-router';
+import { router, useFocusEffect } from 'expo-router';
 import { Drawer } from 'expo-router/drawer'
 
 import { useAuth } from '@/hooks/useAuth';
@@ -11,6 +11,7 @@ import Profile from '@/src/app/(drawer)/(tabs)/user';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { AvatarDrawer } from '@/src/components/drawer/profile/avatar';
 import TabsHome from './(tabs)';
+import { useCallback, useEffect } from 'react';
 
 
 export default function DrawerLayout() {
@@ -18,12 +19,16 @@ export default function DrawerLayout() {
 
   function userLogOut() {
     if (user) {
-      // logOut()
+      logOut()
       router.navigate('/config')
       console.log('print function testUser', user)
     } else {
     }
   }
+  
+  useFocusEffect(useCallback(() => {
+    console.log('print user layout', user)
+  }, [user]))
   
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
@@ -71,10 +76,10 @@ export default function DrawerLayout() {
           name="config"   
           initialParams={{ message: user }}
           options={{
-            drawerLabel: !user ? 'LogIn' : 'SignOut',
+            drawerLabel: !user.email ? 'LogIn' : 'SignOut',
             drawerIcon: ({ color, size }) => (
               <MaterialIcons 
-                name={ !user ? 'login' : 'logout' }
+                name={ !user.email ? 'login' : 'logout' }
                 size={size}
                 color={color}
               />
@@ -84,18 +89,19 @@ export default function DrawerLayout() {
             drawerItemPress: (e) => {
               e.preventDefault()
               {
-                user ? 
+                user.email ? 
                 Alert.alert('SignOut', 'Do you want to log out?', [
                   {
                     text: 'Cancel',
-                    style: 'cancel'
+                    style: 'cancel',
+                    onPress: () => router.navigate('/(drawer)/(tabs)')
                   },
                   {
                     text: 'Leave',
                     onPress: () => userLogOut()
                   }
                 ])
-                : userLogOut()
+                : router.navigate('/logIn')
               }
             }
           }}

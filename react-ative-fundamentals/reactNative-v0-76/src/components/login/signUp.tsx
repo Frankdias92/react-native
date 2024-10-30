@@ -28,7 +28,7 @@ export function HandleWithSignUp() {
     if (data)
       Alert.alert('Success', 'New Account Created', [
       {
-        text: 'SignIn',
+        text: 'Log In',
         onPress: () => signUp(data)
       }
     ]
@@ -101,7 +101,7 @@ export function HandleWithSignUp() {
       {errors.password && <Text style={styles.textAlert}>Password is required</Text>}
 
       <ButtonText 
-        text="Submit"
+        text="Create account"
         onPress={handleSubmit(onSubmit)}
         variante="lime-500"
       />

@@ -7,7 +7,7 @@ import { StorageUserGet, StorageUserLogOut, StorageUserSave } from "@/storage/st
 import { storageAuthTokenGet, storageAuthTokenRemove, storageAuthTokenSave } from "@/storage/storageAuthTokens"
 
 export type AuthContextDataProps = {
-  user: UserDTO | UserSignInDTO
+  user: UserDTO
   signIn: ( data: UserSignInDTO ) => void
   signUp: ( data: UserDTO ) => void
   logOut: () => void
@@ -21,7 +21,7 @@ type AuthContextProviderProps = {
 }
 
 export function AuthContextProvider({ children }: AuthContextProviderProps) {
-  const [user, setUser] = useState<UserDTO | UserSignInDTO>({} as UserDTO)
+  const [user, setUser] = useState<UserDTO>({} as UserDTO)
   const [isLoadingUserStorageData, setIsLoadingUserStorage] = useState(false)
 
   
@@ -31,6 +31,7 @@ export function AuthContextProvider({ children }: AuthContextProviderProps) {
     email: 'email',
     password: '123'
   }
+  
   async function userAndTokenUpdate(userData: UserDTO, token: string) {
     setUser(userData)
   }
@@ -68,7 +69,7 @@ async function storageUserAndTokenSave(userData: UserDTO, token: string) {
       Alert.alert('Error', 'your password or email are wrong')
     } finally {
       setTimeout(() => {
-        router.navigate('/(drawer)/(tabs)/user')
+        router.navigate('/(drawer)/(tabs)/')
         setIsLoadingUserStorage(false)
       }, 2000)
     }
@@ -100,8 +101,8 @@ async function storageUserAndTokenSave(userData: UserDTO, token: string) {
       throw error
       
     } finally {
-      router.navigate('/')
       setIsLoadingUserStorage(false)
+      router.navigate('/(drawer)/(tabs)')
     }
   }
 

@@ -1,6 +1,7 @@
 import { ButtonText } from "@/src/components/buttonText";
 import { InputForm } from "@/src/components/inputForm";
 import { UserProfile } from "@/src/components/user/userProfile";
+import { useAuth } from "@/src/hooks/useAuth";
 import { useEffect, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { Text, View } from "react-native";
@@ -17,9 +18,9 @@ type FormDataProps = {
 export default function ControllerProfile() {
   const [submittedData, setSubmittedData] = useState<FormDataProps>({} as FormDataProps)
   const { control, handleSubmit, formState: { errors }} = useForm<FormDataProps>()
+  const { user } = useAuth()
 
   const onSubmit = (data: FormDataProps) => {
-    
     setSubmittedData(data)
   }
   
@@ -42,7 +43,7 @@ export default function ControllerProfile() {
             textContentType="name"
             onBlur={onBlur}
             onChange={onChange}
-            value={value}
+            value={user.name || value}
             errors={errors}
           />
         )} 
@@ -58,7 +59,7 @@ export default function ControllerProfile() {
             textContentType='emailAddress'
             onBlur={onBlur}
             onChange={onChange}
-            value={value}
+            value={user.email || value}
             // errors={errors.email?.message}
             errors={errors}
           />
@@ -100,10 +101,6 @@ export default function ControllerProfile() {
       />
 
       <ButtonText text="Update profile" variante="lime-500" onPress={handleSubmit(onSubmit)} />
-
-      { submittedData && (
-        <Text className="color-slate-100">{submittedData.email}</Text>
-      )}
 
     </View>
   )

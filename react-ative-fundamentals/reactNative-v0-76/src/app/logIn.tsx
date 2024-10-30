@@ -5,16 +5,17 @@ import { Link, router, useFocusEffect } from "expo-router";
 import { useAuth } from "@/src/hooks/useAuth";
 import { Loading } from "@/src/components/loading";
 
-import { Suspense, useCallback } from "react";
+import { Suspense, useCallback, useState } from "react";
 
 import { HandleWithSignUp } from "@/src/components/login/signUp";
 import { HandleWithSignIn } from "@/src/components/login/signIn";
 import { TouchableOpacity } from "react-native-gesture-handler";
+import { TextOnPress } from "../components/textOnPress";
 
 
 export default function Login() {
   const { user, isLoadingUserStorageData, logOut } = useAuth()
-  // const [newUser, setNewUser] = useState(false)
+  const [makeLogin, setMakeLogin] = useState(false)
 
   if (isLoadingUserStorageData) {
     return (
@@ -24,29 +25,33 @@ export default function Login() {
     )
   }
   
-  // useFocusEffect(useCallback(() => {
-  //   if(user) {
-  //     router.navigate('/(drawer)/home')
-  //   }
-  // }, []))
+  useFocusEffect(useCallback(() => {
+    if(user.email) {
+      router.navigate('/(drawer)/(tabs)')
+    }
+  }, [user]))
 
 
 
   return (
-    <View className="flex-1 justify-start items-center pt-52 gap-4 px-8 bg-slate-950">
+    <View className="flex w-full h-full justify-start items-center pt-32 gap-4 px-8 bg-slate-950">
       <Suspense fallback={<Loading/>}>
-        { user.email ?
+        { makeLogin ?
           (
-            <HandleWithSignIn />
+            <>
+              <HandleWithSignIn />
+              <TextOnPress text="Create a new account" onPress={() => setMakeLogin(!true)} />
+            </>
           ) : (
-            <HandleWithSignUp />
+            <>
+              <HandleWithSignUp />
+              <TextOnPress text="Already have an account?" onPress={() => setMakeLogin(true)} />
+            </>
           ) 
         }
       </Suspense> 
-        <TouchableOpacity onPress={logOut}>
-          <Text className="text-white">LogOut</Text>
-        </TouchableOpacity>
 
+        
         <Link
           href={'/(drawer)/(tabs)'} 
           className="text-white"

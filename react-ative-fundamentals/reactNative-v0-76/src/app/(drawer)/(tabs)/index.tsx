@@ -5,10 +5,7 @@ import { Text, TouchableOpacity, View } from "react-native";
 
 
 export default function Home() {
-  function test() {
-    console.log('click')
-    router.navigate('/')
-  }
+
   
   return (
     <View className="flex-1 justify-center items-center bg-slate-900">
@@ -18,10 +15,6 @@ export default function Home() {
 
       <TouchableOpacity onPress={() => router.navigate('/(drawer)/(tabs)/product/12')}>
         <Text className="color-slate-400">Go to products</Text>
-      </TouchableOpacity>
-      
-      <TouchableOpacity onPress={test}>
-        <Text className="color-slate-400">Go to login</Text>
       </TouchableOpacity>
     </View>
   )
