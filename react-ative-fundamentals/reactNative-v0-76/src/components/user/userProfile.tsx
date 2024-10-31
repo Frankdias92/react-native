@@ -1,43 +1,30 @@
 import { useState } from "react";
-import { Image, Text, View } from "react-native";
-import * as ImagePicker from 'expo-image-picker';
-import { TouchableOpacity } from "react-native-gesture-handler";
+import { Image, Text, TouchableOpacity, View } from "react-native";
 
-export function UserProfile() {
-  const [photoIsLoading, setPhotoIsLoading] = useState(false)
-  const [image, setImage] = useState<string | null>(null)
+import { Feather } from "@expo/vector-icons";
 
-  async function handleUserPhotoSelect() {
-    try {
-      setPhotoIsLoading(true)
+interface UserProfileProps {
+  imageUser: string
+  onPress?: () => void
+}
 
-      const photoSelected = await ImagePicker.launchImageLibraryAsync({
-        quality: 1,
-        aspect: [4, 4],
-        allowsEditing: true
-      })
-
-      if (!photoSelected.canceled) {
-        setImage(photoSelected.assets[0].uri)
-      }
-      
-    } catch (error) {
-      console.error('something wrong with the photo', error)
-    } finally {
-      setPhotoIsLoading(false)
-    }
-  }
+export function UserProfile({ imageUser, onPress }: UserProfileProps) {
   
   return (
     <View className='flex flex-row gap-6 w-full justify-start items-center relative'>
       <View className="flex size-36 relative justify-center items-center">
-        <TouchableOpacity >
 
-        <Image 
-          source={{uri:'https://www.github.com/frankdias92.png'}}
-          className='flex size-32 rounded-full z-10'
-        />
-          </TouchableOpacity>
+        { imageUser ? (
+          <Image 
+            source={{uri: imageUser}}
+            className='flex size-32 rounded-full z-0'
+          />
+        ) : (
+            <TouchableOpacity onPress={onPress} className="flex size-32 rounded-full z-20 items-center justify-center">
+              <Feather name="camera" color={'green'} size={32}/>     
+            </TouchableOpacity>
+          )
+        }
         <View className="flex absolute size-36 rounded-full z-0 border-lime-700 border-[2px]"/>
       </View>
     </View>

@@ -78,8 +78,8 @@ async function storageUserAndTokenSave(userData: UserDTO, token: string) {
   function signUp(data: UserDTO) {
     try {
       setIsLoadingUserStorage(true)
-      setUser(data)
-      StorageUserSave(data)
+      setUser(schemaTestUser)
+      StorageUserSave(schemaTestUser)
     } catch (error) {
       throw error
     } finally {

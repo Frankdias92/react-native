@@ -5,6 +5,7 @@ import { useAuth } from "@/src/hooks/useAuth";
 import { useEffect, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { Text, View } from "react-native";
+import * as ImagePicker from 'expo-image-picker';
 
 
 type FormDataProps = {
@@ -18,10 +19,36 @@ type FormDataProps = {
 export default function ControllerProfile() {
   const [submittedData, setSubmittedData] = useState<FormDataProps>({} as FormDataProps)
   const { control, handleSubmit, formState: { errors }} = useForm<FormDataProps>()
+  const [photoIsLoading, setPhotoIsLoading] = useState(false)
+  const [imageProfile, setImageProfile] = useState<string>('')
+
   const { user } = useAuth()
 
   const onSubmit = (data: FormDataProps) => {
     setSubmittedData(data)
+  }
+
+  async function handleUserPhotoSelect() {
+    console.log('click')
+    try {
+      setPhotoIsLoading(true)
+
+      const photoSelected = await ImagePicker.launchImageLibraryAsync({
+        mediaTypes: ImagePicker.MediaTypeOptions.Images,
+        quality: 1,
+        aspect: [4, 4],
+        allowsEditing: true
+      })
+
+      if (photoSelected.assets) {
+        setImageProfile(photoSelected.assets[0].uri)
+      }
+      
+    } catch (error) {
+      console.error('something wrong with the photo', error)
+    } finally {
+      setPhotoIsLoading(false)
+    }
   }
   
   useEffect(() => {
@@ -30,8 +57,8 @@ export default function ControllerProfile() {
   
   return (
     <View className="flex-1 justify-center items-center gap-4">
-      <View>
-        <UserProfile />
+      <View >
+        <UserProfile imageUser={imageProfile} onPress={handleUserPhotoSelect} />
       </View>
 
       <Controller 
