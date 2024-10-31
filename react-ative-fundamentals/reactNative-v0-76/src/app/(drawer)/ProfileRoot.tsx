@@ -23,7 +23,12 @@ export default function ProfileRoot() {
             </Text>
 
             <View className="flex w-full absolute bottom-10">
-              <ButtonText text="SignIn" variante="slate-100" onPress={() => router.navigate('/logIn')} />
+              <ButtonText 
+                text="SignIn" 
+                variante="slate-100" 
+                onPress={() => router.navigate('/logIn')}
+                size="w-full"
+              />
             </View>
           </View>
         ) : (

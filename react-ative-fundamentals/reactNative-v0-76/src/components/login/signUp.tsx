@@ -104,6 +104,7 @@ export function HandleWithSignUp() {
         text="Create account"
         onPress={handleSubmit(onSubmit)}
         variante="lime-500"
+        size="w-full"
       />
 
     </>

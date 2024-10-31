@@ -104,7 +104,12 @@ export default function ControllerProfile() {
         )}
       />
 
-      <ButtonText text="Update profile" variante="lime-500" onPress={handleSubmit(onSubmit)} />
+      <ButtonText 
+        text="Update profile" 
+        variante="lime-500" 
+        onPress={handleSubmit(onSubmit)} 
+        size="w-full"
+      />
 
     </View>
   )

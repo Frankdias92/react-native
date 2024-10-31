@@ -76,6 +76,7 @@ export function HandleWithSignIn() {
         text="Login"
         onPress={handleSubmit(onSubmit)}
         variante="lime-500"
+        size="w-full"
       />
     </>
   )
