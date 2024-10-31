@@ -1,0 +1,1 @@
+export const userDataMock =  {"email": "email", "id": "1", "image": "file:///data/user/0/host.exp.exponent/cache/ExperienceData/%2540anonymous%252FreactNative-v0-76-e14a6089-d800-445d-a4ca-ec8bf7e59a4e/ImagePicker/13bb2b59-6c63-447d-a6e1-7e2115d991ee.jpeg", "name": "Franklin", "password": "123"}

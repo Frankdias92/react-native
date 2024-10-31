@@ -1,5 +1,5 @@
 
-import { Alert } from 'react-native';
+import { Alert, Text } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons'
 import { router, useFocusEffect } from 'expo-router';
 import { Drawer } from 'expo-router/drawer'
@@ -21,14 +21,13 @@ export default function DrawerLayout() {
     if (user) {
       logOut()
       router.navigate('/config')
-      console.log('print function testUser', user)
     } else {
     }
   }
   
-  useFocusEffect(useCallback(() => {
-    console.log('print user layout', user)
-  }, [user]))
+  // useFocusEffect(useCallback(() => {
+  //   console.log('print user layout', user)
+  // }, [user]))
   
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
@@ -49,7 +48,7 @@ export default function DrawerLayout() {
           options={{
             drawerActiveBackgroundColor: '#red',
             drawerIcon: ({ color, size }) => (
-              <AvatarDrawer />
+              user.email ? <AvatarDrawer /> :  <AvatarDrawer />
             )
           }}
           listeners={{drawerItemPress: () => router.navigate('/(tabs)/user')}}

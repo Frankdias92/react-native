@@ -11,6 +11,7 @@ export async function StorageUserGet() {
 
   const user: UserDTO = storage ? JSON.parse(storage) : {}
 
+  console.log('print user save', user)
   return user
 }
 

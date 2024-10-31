@@ -1,11 +1,11 @@
 import { View } from "react-native";
 
-import { router } from "expo-router";
+import { router, useFocusEffect } from "expo-router";
 
 import { useAuth } from "@/src/hooks/useAuth";
 import { Loading } from "@/src/components/loading";
 
-import { Suspense } from "react";
+import { Suspense, useCallback } from "react";
 import Login from "./logIn";
 
 
@@ -20,16 +20,13 @@ export default function Index() {
     )
   }
 
-  if (user.email) {
+  useFocusEffect(useCallback(() => {
     router.navigate('/(drawer)/(tabs)') 
-  }
+  }, [user]))
 
   return (
     <View className="flex-1 justify-start items-center gap-4 px-8 bg-slate-950">
-      <Suspense fallback={<Loading />}>
-        <Login />
-      </Suspense>
-        
+      <Login />        
     </View>
   )
 }

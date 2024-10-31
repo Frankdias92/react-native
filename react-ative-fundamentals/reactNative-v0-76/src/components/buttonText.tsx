@@ -4,13 +4,13 @@ import { Button, Text, TouchableOpacity } from "react-native";
 interface ButtonTextProps {
   text: string
   onPress: () => void
-  variante: 'lime-500' | 'slate-100'
+  variante: 'lime-500' | 'slate-100' 
 }
 
 export function ButtonText({ text, onPress, variante, ...rest }: ButtonTextProps) {
   return (
     <TouchableOpacity 
-        className={`flex w-full py-4 px-2  rounded-lg
+        className={`flex flex-1 justify-center px-2  rounded-lg
           ${variante === 'lime-500' ? 'bg-lime-500' : 'bg-slate-100'}
         `}
         onPress={onPress}

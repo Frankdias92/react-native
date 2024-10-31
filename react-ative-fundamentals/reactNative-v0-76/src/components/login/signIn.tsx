@@ -24,12 +24,7 @@ export function HandleWithSignIn() {
 
 
   const onSubmit = async (data: UserSignInDTO) => {
-    if (user.email === data.email && user.password === data.password) {
-      signIn(data)
-    } else {
-      console.log('error')
-      ToastAndroid.show('Ops! something wrong with your data.', ToastAndroid.LONG);
-    }
+    signIn(data)
   }
 
   
