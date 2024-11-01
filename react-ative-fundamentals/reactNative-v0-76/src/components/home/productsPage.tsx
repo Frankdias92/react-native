@@ -1,4 +1,4 @@
-import { FlatList, Text, View } from "react-native";
+import { FlatList, ScrollView, Text, View } from "react-native";
 import { TextMessage } from "../textMessage";
 import { Controller, useForm } from "react-hook-form";
 import { InputForm } from "../inputForm";
@@ -10,7 +10,7 @@ export function ProductsPage() {
   const { control, handleSubmit, formState: { errors } } = useForm()
   
   return (
-    <View className="flex w-full gap-2">
+    <View className="flex w-full gap-2 pb-44">
       <TextMessage text="Buy varied products" />
 
       <Controller
@@ -34,18 +34,24 @@ export function ProductsPage() {
         name="search"
       />
 
-      <View className="flex w-full">
-      <FlatList 
-        data={productsData}
-        keyExtractor={(item) => item.id.toString()}
-        renderItem={({ item }) => (
-          <ProductList 
-          productsData={ item }
-          />
-        )}
-      />
-      </View>
+      <ScrollView>
       
+        <View className="flex w-full">
+        <FlatList 
+          data={productsData}
+          keyExtractor={(item) => item.id.toString()}
+          renderItem={({ item }) => (
+            <ProductList 
+            productsData={ item }
+            />
+          )}
+          scrollEnabled={false}
+          numColumns={2}
+          columnWrapperStyle={{flexWrap: "wrap"}}
+        />
+        </View>
+
+      </ScrollView>
     </View>
   )
 }

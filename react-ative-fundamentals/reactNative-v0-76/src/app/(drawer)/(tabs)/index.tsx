@@ -8,12 +8,10 @@ export default function Home() {
 
   
   return (
-    <ScrollView >
-    <View className="flex w-full h-full pt-12 pb-32 px-8 gap-8 justify-start items-center bg-slate-200 ">
+    <View className="flex w-full h-full pt-12 pb-32 px-4 gap-8 justify-start items-center bg-slate-200 ">
       <HeaderHome />
       <YourStoreInfo />
       <ProductsPage />
     </View>
-    </ScrollView>
   )
 }
