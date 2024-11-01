@@ -1,38 +1,25 @@
 import { FlatList, ScrollView, Text, View } from "react-native";
-import { TextMessage } from "../textMessage";
-import { Controller, useForm } from "react-hook-form";
-import { InputForm } from "../inputForm";
 import { productsData } from "@/src/utils/products.data";
-import { ProductList } from "./productList";
 
+import { ProductList } from "@/components/home/productList";
+import { TextMessage } from "@/components/textMessage";
+import { SearchBarProducts } from "@/components/home/searchBarProducts";
+import { Modal } from "../../app/(drawer)/(tabs)/modal";
+import { useState } from "react";
 
 export function ProductsPage() {
-  const { control, handleSubmit, formState: { errors } } = useForm()
+  const [modalView, setModalView] = useState(false)
   
   return (
-    <View className="flex w-full gap-2 pb-44">
+    <View className="flex w-full gap-2 pb-44 relative">
       <TextMessage text="Buy varied products" />
 
-      <Controller
-        control={control}
-        rules={{
-          maxLength: 100,
-          required: true
-        }}
-        render={({ field: { onChange, onBlur, value } }) => (
-          <InputForm 
-            onChange={onChange}
-            onBlur={onBlur}
-            value={value}
-            errors={errors}
-
-            placeholder="Search"
-            textContentType='name'
-            color='slate-100'
-          />
-        )}
-        name="search"
-      />
+      <SearchBarProducts filterSearch={() => setModalView(!false)} />
+        {modalView && 
+          <View className="flex absolute w-full h-full z-50 bg-slate-950">
+            <Modal />
+          </View>
+        }
 
       <ScrollView>
       
