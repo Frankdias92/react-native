@@ -33,6 +33,7 @@ export default function TabsLayout() {
         }}/>
 
         <Tabs.Screen name='product' options={{ tabBarButton: () => null }}/>
+
       </Tabs>
   )
 }
