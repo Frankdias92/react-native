@@ -12,13 +12,13 @@ export function RoudedTextVariant({ condition, text, onPress }: RoudedTextVarian
   
   
   return (
-    <TouchableOpacity
+    <TouchableOpacity activeOpacity={.90}
       className={`flex flex-row px-8 items-center gap-2 rounded-full
-       ${condition ? 'bg-stone-400' : 'bg-lime-500'} 
+       ${!condition ? 'bg-stone-400' : 'bg-lime-500'} 
       `}
       onPress={onPress}
       >
-        <TextMessage text={ text } variante={condition ? 'text-base' : 'text-bold-white'}/>
+        <TextMessage text={ text } variante={!condition ? 'text-base' : 'text-bold-white'}/>
         <FontAwesome name="close" color={'#f5f5f4'}/>
       </TouchableOpacity>
   )
