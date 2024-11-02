@@ -9,6 +9,8 @@ import { router } from "expo-router";
 import { RoudedButton } from "../buttons/roudedButton";
 import { FilterProductDTO } from "@/src/dtos/ProductDTO";
 import { useForm } from "react-hook-form";
+import { SwitchButton } from "../buttons/switchButton";
+import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
 
 export function ProductsPage() {
   const [modalVisible, setModalVisible] = useState(false);
@@ -16,7 +18,7 @@ export function ProductsPage() {
     id: 1,
     condition: ['NEW', 'OLD'],
     conditionIsSelected: false,
-    payment_methods: 'Pix',
+    payment_methods: ['Pix', 'Card Credit', 'Boleto'],
     description: 'Sample product description',
     accepts_exchange: true,
   })
@@ -26,7 +28,8 @@ export function ProductsPage() {
   
   const [condition, setCondition] = useState<string>()
   const [exchange, setExchange] = useState(false)
-  
+
+  const [isPaymenteSelected, setIsPaymenteSelected] = useState<string[]>([])
   
   function handleWithCondition(condition: string) {
     if(condition) {
@@ -34,6 +37,11 @@ export function ProductsPage() {
     }
   }
 
+  function handleSelectMethod(itemSelected: string) {
+    setIsPaymenteSelected((prevSelected) => 
+      prevSelected.includes(itemSelected) ? prevSelected.filter((item) => item !== itemSelected )
+      : [...prevSelected, itemSelected])
+  }
 
   
   return (
@@ -93,19 +101,27 @@ export function ProductsPage() {
               <TextMessage text="Accepts exchange?" 
                 variante="text-bold"
               >
-                <TouchableOpacity 
-                  className="flex w-16 h-8 bg-stone-400 rounded-3xl overflow-hidden justify-center relative"
-                  onPress={() => setExchange(!exchange)}
-                  activeOpacity={.9}
-                >
-                  <View
-                    className={
-                    `flex size-7 rounded-full overflow-hidden absolute mx-1
-                    bg-lime-400
-                      ${!exchange && 'bg-stone-300 right-0'}
-                    `}
+                <SwitchButton exchange={exchange} onPress={() => setExchange(!exchange)} />
+              </TextMessage>
+
+              <TextMessage text="Payment" variante="text-bold">
+                  <FlatList 
+                    data={filteredProduct?.payment_methods}
+                    keyExtractor={(item, index) => `${item}-${index}`}
+                    renderItem={({ item }) => (
+                      <TouchableOpacity 
+                        onPress={() => handleSelectMethod(item)}
+                        className="flex flex-row w-full"
+                      >
+                        {isPaymenteSelected.includes(item) ? (
+                          <MaterialCommunityIcons name="checkbox-marked" size={24} color={'#171717'}/>
+                        ) : (
+                          <MaterialCommunityIcons name="checkbox-blank-outline" size={24} color={'#171717'}/>
+                        )}
+                        <TextMessage text={item}/>
+                      </TouchableOpacity>
+                    )}
                   />
-                </TouchableOpacity>
               </TextMessage>
 
 

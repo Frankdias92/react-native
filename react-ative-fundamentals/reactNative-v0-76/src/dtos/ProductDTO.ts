@@ -20,7 +20,7 @@ export type FilterProductDTO = {
   id: number;
   condition: ['NEW', 'OLD'];
   conditionIsSelected: boolean;
-  payment_methods: 'Pix' | 'Card Credit';
+  payment_methods: ['Pix', 'Card Credit', 'Boleto'];
   description: string;
   accepts_exchange: boolean;
 }

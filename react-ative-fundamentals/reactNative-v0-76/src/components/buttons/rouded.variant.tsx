@@ -14,7 +14,7 @@ export function RoudedTextVariant({ condition, text, onPress }: RoudedTextVarian
   return (
     <TouchableOpacity activeOpacity={.90}
       className={`flex flex-row px-8 items-center gap-2 rounded-full
-       ${!condition ? 'bg-stone-400' : 'bg-lime-500'} 
+       ${!condition ? 'bg-stone-400' : 'bg-stone-900'} 
       `}
       onPress={onPress}
       >
