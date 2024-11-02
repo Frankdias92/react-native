@@ -11,6 +11,7 @@ import { FilterProductDTO } from "@/src/dtos/ProductDTO";
 import { useForm } from "react-hook-form";
 import { SwitchButton } from "../buttons/switchButton";
 import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
+import { ButtonText } from "../buttonText";
 
 export function ProductsPage() {
   const [modalVisible, setModalVisible] = useState(false);
@@ -48,7 +49,7 @@ export function ProductsPage() {
     <View className="flex w-full gap-2 pb-44">
       <TextMessage text="Buy varied products" />
 
-      <SearchBarProducts filterSearch={() => setModalVisible(!!false)} />
+      <SearchBarProducts filterSearch={() => setModalVisible(true)} />
 
       <ScrollView>
       
@@ -68,15 +69,20 @@ export function ProductsPage() {
         </View>
 
         <Modal 
-          visible={!modalVisible}
-          animationType="slide"
+          visible={modalVisible}
+          animationType='slide'
           transparent
         >
-          <View 
-            className="flex-1 justify-end bg-black/75"
+          <TouchableOpacity 
+            activeOpacity={1}
+            onPress={() => setModalVisible(false)}
+            className="flex-1 justify-end z-10
+              bg-black/60 transition-colors"
           >
-            <View 
-              className="flex w-full min-h-[120px] rounded-t-2xl bg-white p-4"
+            <TouchableOpacity 
+              activeOpacity={1}
+              onPress={() => console.log('click on the model')}
+              className="flex w-full min-h-[120px] rounded-t-2xl bg-white p-4 gap-4 z-50 relative"
             >
               <TextMessage text="Filter products" variante="text-2xl" />
 
@@ -124,9 +130,19 @@ export function ProductsPage() {
                   />
               </TextMessage>
 
+              <View className="flex w-full flex-row gap-2 mt-10">
+                <ButtonText text="Reset filter" variante="slate-100" size="flex-1" />
+                <ButtonText text="Apply" variante="slate-900" size="flex-1" />
+              </View>
 
-            </View>
-          </View>
+              <TouchableOpacity 
+                className="flex w-full absolute top-4 items-end"
+                onPress={() => setModalVisible(false)}
+              >
+                <MaterialCommunityIcons name="close" size={24} color={'#171717'}/>
+              </TouchableOpacity>
+            </TouchableOpacity>
+          </TouchableOpacity>
 
         </Modal>
       </ScrollView>

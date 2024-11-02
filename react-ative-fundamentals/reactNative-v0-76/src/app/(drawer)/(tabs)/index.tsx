@@ -5,7 +5,6 @@ import { ScrollView, View } from "react-native";
 
 
 export default function Home() {
-
   
   return (
     <View className="flex w-full h-full pt-12 pb-32 px-4 gap-8 justify-start items-center bg-slate-200 relative">
