@@ -14,7 +14,14 @@ export default function RootLayout() {
     <AuthContextProvider>
       <View className="flex-1 bg-slate-950">
         <GestureHandlerRootView style={{ flex: 1 }} >
-          <Stack screenOptions={{ headerShown: false }} />
+          <Stack screenOptions={
+            { 
+              headerShown: false, 
+              statusBarColor: '#a3e635',
+              statusBarStyle: 'light',
+              statusBarAnimation: 'slide'
+            }}
+          />
         </GestureHandlerRootView>
       </View>
     </AuthContextProvider>

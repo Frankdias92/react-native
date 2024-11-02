@@ -1,14 +1,13 @@
 import { FlatList, ScrollView, View } from "react-native";
 import { useState } from "react";
 
-
 import { productsData } from "@/src/utils/products.data";
 
+import { ModalFilteredProducts } from "@/components/modal/modal";
 import { SearchBarProducts } from "@/components/home/searchBarProducts";
-
 import { ProductList } from "@/components/home/productList";
 import { TextMessage } from "@/components/textMessage";
-import { ModalFilteredProducts } from "../modal/modal";
+import { router } from "expo-router";
 
 
 export function ProductsPage() {
@@ -21,7 +20,6 @@ export function ProductsPage() {
       <SearchBarProducts filterSearch={() => setModalVisible(true)} />
 
       <ScrollView>
-      
         <View className="flex w-full">
         <FlatList 
           data={productsData}
@@ -29,6 +27,7 @@ export function ProductsPage() {
           renderItem={({ item }) => (
             <ProductList 
             productsData={ item }
+            onPress={() => router.navigate(`/(tabs)/product/${item.id}`)}
             />
           )}
           scrollEnabled={false}
@@ -36,9 +35,12 @@ export function ProductsPage() {
           columnWrapperStyle={{flexWrap: "wrap"}}
         />
         </View>
-
-        <ModalFilteredProducts modalVisible={modalVisible} onPress={() => setModalVisible(false)}/>
       </ScrollView>
+
+      <ModalFilteredProducts 
+        modalVisible={modalVisible} 
+        onPress={() => setModalVisible(false)}
+      />
     </View>
   )
 }

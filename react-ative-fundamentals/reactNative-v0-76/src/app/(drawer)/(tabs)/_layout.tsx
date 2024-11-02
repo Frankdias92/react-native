@@ -1,11 +1,16 @@
 import { useAuth } from '@/src/hooks/useAuth';
 import { MaterialIcons } from '@expo/vector-icons';
-import { Tabs } from 'expo-router';
+import { useNavigationState } from '@react-navigation/native';
+import { router, Tabs } from 'expo-router';
 
 
 export default function TabsLayout() {
   const { user } = useAuth()
-  
+
+  // const isProductScreen = useNavigationState(
+  //   (state) => state?.routes[state.index]?.name === 'product/[id]'
+  // );
+
   return (
       <Tabs
         screenOptions={{
@@ -19,6 +24,7 @@ export default function TabsLayout() {
         }}
       >
         <Tabs.Screen name="index" options={{
+          headerStyle:{backgroundColor: '#a3e635'},
           tabBarLabel: 'Home',
           tabBarIcon: ({ color, size }) => <MaterialIcons name='home' color={color} size={size}/>
         }}/>
@@ -32,7 +38,14 @@ export default function TabsLayout() {
           tabBarIcon: ({ color, size }) => <MaterialIcons name='settings' color={color} size={size}/>
         }}/>
 
-        <Tabs.Screen name='product' options={{ tabBarButton: () => null }}/>
+        <Tabs.Screen 
+          name='product' 
+          options={{ 
+            tabBarButton: () => null,
+            headerShown: false,
+            tabBarStyle: {display: 'none'}
+          }}
+        />
 
       </Tabs>
   )

@@ -46,7 +46,7 @@ export default function DrawerLayout() {
         <Drawer.Screen
           name="ProfileRoot"
           options={{
-            drawerActiveBackgroundColor: '#red',
+            drawerActiveBackgroundColor: 'transparent',
             drawerIcon: ({ color, size }) => (
               user.email ? <AvatarDrawer /> :  <AvatarDrawer />
             )
