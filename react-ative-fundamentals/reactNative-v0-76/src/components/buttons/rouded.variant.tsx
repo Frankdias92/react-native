@@ -2,13 +2,14 @@ import { TouchableOpacity } from "react-native";
 import { TextMessage } from "../textMessage";
 import { FontAwesome } from "@expo/vector-icons";
 
-interface RoudedTextVariantProps {
+export interface RoudedTextVariantProps {
   condition: true | false
   text: string
   onPress?: () => void
+  showIcone?: boolean
 }
 
-export function RoudedTextVariant({ condition, text, onPress }: RoudedTextVariantProps) {
+export function RoudedTextVariant({ condition, text, onPress, showIcone }: RoudedTextVariantProps) {
   
   
   return (
@@ -19,7 +20,7 @@ export function RoudedTextVariant({ condition, text, onPress }: RoudedTextVarian
       onPress={onPress}
       >
         <TextMessage text={ text } variante={!condition ? 'text-base' : 'text-bold-white'}/>
-        <FontAwesome name="close" color={'#f5f5f4'}/>
+        {showIcone && <FontAwesome name="close" color={'#f5f5f4'}/> }
       </TouchableOpacity>
   )
 }

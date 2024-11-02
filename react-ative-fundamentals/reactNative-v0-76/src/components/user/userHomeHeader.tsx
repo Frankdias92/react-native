@@ -2,7 +2,11 @@ import { useAuth } from "@/src/hooks/useAuth";
 import { Image, Text, TouchableOpacity, View } from "react-native";
 
 
-export function UserHomeHeader() {
+interface UserProfileProps {
+  showMessage?: boolean
+}
+
+export function UserHomeHeader({ showMessage=true }: UserProfileProps) {
   const { user } = useAuth()
   
   return (
@@ -12,7 +16,7 @@ export function UserHomeHeader() {
         className='flex size-11 rounded-full z-0'
       />
       <View className="flex justify-center">
-        <Text className="text-base color-stone-900 font-light leading-tight">Welcome!</Text>
+        {showMessage && <Text className="text-base color-stone-900 font-light leading-tight">Welcome!</Text>}
         <Text className="text-base color-stone-900 font-bold leading-tight">{user && user.name}</Text>
       </View>
     </TouchableOpacity>

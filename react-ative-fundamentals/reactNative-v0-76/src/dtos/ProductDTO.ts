@@ -1,19 +1,21 @@
+import { ImageSourcePropType } from "react-native";
+
 export type ProductDTO = {
   id: number;
   name: string;
   price: number;
   condition: string;
-  payment_methods: 'Pix' | 'Cash' | 'Card Credit';
+  payment_methods: string[];
   description: string;
   accepts_exchange: boolean;
-  image: string;
+  image: ImageSourcePropType;
 }
 
 export type ProductListDTO = {
   id: number;
   name: string;
   price: number;
-  image: string;
+  image: ImageSourcePropType;
 }
 
 export type FilterProductDTO = {
