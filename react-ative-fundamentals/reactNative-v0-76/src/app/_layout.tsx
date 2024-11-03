@@ -18,7 +18,7 @@ export default function RootLayout() {
             { 
               headerShown: false, 
               statusBarColor: '#a3e635', // look for issue on loading
-              statusBarStyle: 'light',
+              // statusBarStyle: 'light',
               statusBarAnimation: 'slide'
             }}
           />

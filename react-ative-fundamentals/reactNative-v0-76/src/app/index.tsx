@@ -21,7 +21,9 @@ export default function Index() {
   }
 
   useFocusEffect(useCallback(() => {
-    router.navigate('/(drawer)/(tabs)') 
+    if (user.email) {
+      router.navigate('/(drawer)/(tabs)') 
+    }
   }, [user]))
 
   return (
