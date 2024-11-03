@@ -34,9 +34,13 @@ export default function TabsLayout() {
             }}/>
           ) : <Tabs.Screen name="user" options={{ tabBarButton: () => null }}/>
         }
-        <Tabs.Screen name="settings" options={{
-          tabBarIcon: ({ color, size }) => <MaterialIcons name='settings' color={color} size={size}/>
-        }}/>
+        <Tabs.Screen 
+          name="settings" 
+          options={{
+            tabBarIcon: ({ color, size }) => <MaterialIcons name='settings' color={color} size={size}/>,
+            tabBarLabel: 'Account'
+          }}
+        />
 
         <Tabs.Screen 
           name='product' 

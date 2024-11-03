@@ -1,9 +1,8 @@
 import { useAuth } from "@/src/hooks/useAuth";
-import { router, useFocusEffect } from "expo-router";
+import { router } from "expo-router";
 import { Image, Text, View } from "react-native";
 import Profile from "./(tabs)/user";
 import { ButtonText } from "@/src/components/buttonText";
-import { useCallback } from "react";
 
 
 export default function ProfileRoot() {
