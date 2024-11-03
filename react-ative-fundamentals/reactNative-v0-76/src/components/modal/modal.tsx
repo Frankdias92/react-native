@@ -71,7 +71,7 @@ export function ModalFilteredProducts({ modalVisible, onPress }: ModalFilteredPr
                 <View className="flex h-8 justify-center mr-2">
                   <RoudedButton 
                     condition={condition === item}
-                    value={item}
+                    text={item}
                     onPress={() => handleWithCondition(item)}
 
                   />
