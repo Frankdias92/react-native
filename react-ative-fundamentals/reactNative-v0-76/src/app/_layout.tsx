@@ -17,7 +17,7 @@ export default function RootLayout() {
           <Stack screenOptions={
             { 
               headerShown: false, 
-              statusBarColor: '#a3e635',
+              statusBarColor: '#a3e635', // look for issue on loading
               statusBarStyle: 'light',
               statusBarAnimation: 'slide'
             }}

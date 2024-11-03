@@ -1,6 +1,6 @@
 
 import { Alert, Text } from 'react-native';
-import { MaterialIcons } from '@expo/vector-icons'
+import { FontAwesome5, MaterialIcons } from '@expo/vector-icons'
 import { router, useFocusEffect } from 'expo-router';
 import { Drawer } from 'expo-router/drawer'
 
@@ -47,8 +47,9 @@ export default function DrawerLayout() {
           name="ProfileRoot"
           options={{
             drawerActiveBackgroundColor: 'transparent',
+            drawerLabel: 'Create an account',
             drawerIcon: ({ color, size }) => (
-              user.email ? <AvatarDrawer /> :  <AvatarDrawer />
+              user.email ? <AvatarDrawer /> :  <FontAwesome5 name="user-alt" size={24} color="black" />
             )
           }}
           listeners={{drawerItemPress: () => router.navigate('/(tabs)/user')}}
