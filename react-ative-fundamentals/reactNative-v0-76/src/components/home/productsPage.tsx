@@ -20,7 +20,7 @@ export function ProductsPage() {
 
       <SearchBarProducts filterSearch={() => setModalVisible(true)} />
 
-      <ScrollView>
+      {/* <ScrollView> */}
         <View className="flex w-full">
         <FlatList 
           data={data}
@@ -31,12 +31,12 @@ export function ProductsPage() {
             onPress={() => router.navigate(`/(tabs)/product/${item.id}`)}
             />
           )}
-          scrollEnabled={false}
+          scrollEnabled={true}
           numColumns={2}
           columnWrapperStyle={{flexWrap: "wrap"}}
         />
         </View>
-      </ScrollView>
+      {/* </ScrollView> */}
 
       <ModalFilteredProducts 
         modalVisible={modalVisible} 

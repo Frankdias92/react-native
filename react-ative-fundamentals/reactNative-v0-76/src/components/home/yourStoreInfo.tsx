@@ -1,6 +1,7 @@
-import { Text, View } from "react-native";
+import { Text, TouchableOpacity, View } from "react-native";
 import { Feather } from '@expo/vector-icons'
 import { TextMessage } from "../textMessage";
+import { router } from "expo-router";
 
 export function YourStoreInfo() {
   return (
@@ -18,12 +19,15 @@ export function YourStoreInfo() {
           </View>
         </View>
 
-        <View className="flex flex-row gap-4 items-center">
+        <TouchableOpacity 
+          className="flex flex-row gap-4 items-center"
+          onPress={() => router.navigate('/(tabs)/settings')}
+        >
           <Text className="flex text-center color-stone-900 antialiased font-medium"
           >
             My announcements
           </Text>
-        </View>
+        </TouchableOpacity>
       </View>
     </View>
   )

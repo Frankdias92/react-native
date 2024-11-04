@@ -9,10 +9,10 @@ import { useAuth } from "@/src/hooks/useAuth";
 export function AccountManager() {
   const { user } = useAuth()
 
-  // const response = productsData.find(item => item.userId === Number(user.id))?.products || []
   const data = productTest.flatMap(item => item.users)
-  const userProducts = data.find(product => product.products)?.products || []
-  console.log('account', userProducts)
+  const userProducts = data.find(user => user.id === 2)?.products || []
+
+  console.log('product by user', userProducts[0])
   
   return (
     <View className="flex w-full gap-4">
@@ -25,16 +25,22 @@ export function AccountManager() {
         <TextMessage text="Announcements" variante="text-base"/>
       </View>
 
-      <FlatList
-        data={userProducts}
-        keyExtractor={(item) => item.id.toString()}
-        renderItem={({ item }) => 
-          <ProductList 
-            onPress={() => console.log('click product announcement')}
-            productsData={item}
-          /> 
-        }
-      />
+      <View className="flex w-full ">
+        <FlatList
+          data={userProducts}
+          keyExtractor={(item) => item.id.toString()}
+          renderItem={({ item }) => 
+            <ProductList 
+              onPress={() => console.log('click product announcement')}
+              productsData={item}
+            /> 
+          }
+          numColumns={2}
+          scrollEnabled={true}
+          showsHorizontalScrollIndicator={false}
+          columnWrapperStyle={{flexWrap: "wrap"}}
+        />
+      </View>
     </View>
   )
 }

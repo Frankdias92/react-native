@@ -34,7 +34,7 @@ export default function Tab() {
   }, [user]))
   
   return (
-    <View className="flex w-full h-full px-8 justify-start pt-12 items-center bg-slate-200">
+    <View className="flex w-full h-full px-4 justify-start pt-12  bg-slate-200">
       <AccountManager />
     </View>
   )
