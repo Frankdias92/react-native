@@ -1,25 +1,32 @@
-import { Image, Text, TouchableOpacity } from "react-native";
+rrAimport { Image, Text, TouchableOpacity } from "react-native";
 import { TextMessage } from "../textMessage";
-import { ProductListDTO, Product } from "@/src/dtos/ProductDTO";
+import { ProductListDTO, ProductTest } from "@/src/dtos/ProductDTO";
 import { useEffect } from "react";
 
 
 interface ProductListProps {
   // productsData: ProductListDTO['products'][number]
-  productsData: Product
+  productsData: ProductTest[]
   onPress: () => void
 }
 
 export function ProductList({ productsData, onPress }: ProductListProps) {
   
+  const allProducts = productsData.map(item => item.users)
+  // const data = productsData.flatMap(item => item.users)
+  // const products = data.flatMap(product => product.products)
+
+  useEffect(() => {
+    console.log(allProducts)
+  }, [productsData])
   
   return (
     <TouchableOpacity className="flex-1 w-[143px] h-[153px]" onPress={onPress}>
-      <Image source={productsData.image as any} className="flex w-[153px] h-[100px] rounded-lg"/>
+      {/* <Image source={productsData.image as any} className="flex w-[153px] h-[100px] rounded-lg"/>
       <TextMessage text={productsData.name} />
       <Text className="color-stone-900 font-bold text-sm">
         $ <Text className="color-stone-900 font-bold text-base">{productsData.price}</Text>
-      </Text>
+      </Text> */}
     </TouchableOpacity>
   )
 }

@@ -5,16 +5,14 @@ import { productsData } from "@/src/utils/products.data";
 import { TextMessage } from "@/src/components/textMessage";
 import { MaterialCommunityIcons, MaterialIcons } from "@expo/vector-icons";
 import { TouchableOpacity } from "react-native-gesture-handler";
-import { UserProfile } from "@/src/components/user/userProfile";
 import { UserHomeHeader } from "@/src/components/user/userHomeHeader";
-import { RoudedTextVariant } from "@/src/components/buttons/rouded.variant";
 import { RoudedButton } from "@/src/components/buttons/roudedButton";
 import { ButtonText } from "@/src/components/buttonText";
 
 export default function Product() {
   const { id } = useLocalSearchParams();
   
-  const data = productsData.find((item) => item.id === Number(id));
+  const data = productsData.flatMap(item => item.products).find((item) => item.id === Number(id));
 
   if (!data) {
     return (

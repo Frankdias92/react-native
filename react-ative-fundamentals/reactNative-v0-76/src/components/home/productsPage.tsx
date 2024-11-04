@@ -12,6 +12,7 @@ import { router } from "expo-router";
 
 export function ProductsPage() {
   const [modalVisible, setModalVisible] = useState(false);
+  const data = productsData.flatMap(item => item.products)
 
   return (
     <View className="flex w-full gap-2 pb-44">
@@ -22,7 +23,7 @@ export function ProductsPage() {
       <ScrollView>
         <View className="flex w-full">
         <FlatList 
-          data={productsData}
+          data={data}
           keyExtractor={(item) => item.id.toString()}
           renderItem={({ item }) => (
             <ProductList 

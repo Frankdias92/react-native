@@ -3,6 +3,7 @@ import { styles } from '@/src/components/login/style';
 import { TextMessage } from '@/src/components/textMessage';
 import { AccountManager } from '@/src/components/user/account';
 import { useAuth } from '@/src/hooks/useAuth';
+import { productTest } from '@/src/utils/products.data';
 import { router, useFocusEffect } from 'expo-router';
 import { useCallback } from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
@@ -29,7 +30,7 @@ export default function Tab() {
   }
 
   useFocusEffect(useCallback(() => {
-    console.log('user info from config tab:', user)
+    console.log(productTest.map(item => item.users))
   }, [user]))
   
   return (
