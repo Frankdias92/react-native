@@ -4,6 +4,7 @@ import { TextMessage } from "../textMessage";
 import { ProductList } from "../home/productList";
 import { productsData, productTest } from "@/src/utils/products.data";
 import { useAuth } from "@/src/hooks/useAuth";
+import { router } from "expo-router";
 
 
 export function AccountManager() {
@@ -31,7 +32,7 @@ export function AccountManager() {
           keyExtractor={(item) => item.id.toString()}
           renderItem={({ item }) => 
             <ProductList 
-              onPress={() => console.log('click product announcement')}
+              onPress={() => router.navigate(`/(drawer)/(tabs)/product/${item.id}`)}
               productsData={item}
             /> 
           }

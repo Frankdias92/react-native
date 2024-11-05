@@ -1,50 +1,79 @@
-# Welcome to your Expo app 👋
+🚧 Under construction 🚧
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+# React Native Navigation and Layouts Project
 
-## Get started
+<img src="./assets/docs/preview.png" alt="Puzzle Piece" width="auto" />
 
-1. Install dependencies
+This React Native project is focused on implementing navigation layouts, including Drawer, Tab, and Stack navigations, with the `expo-router` package. It uses `nativewind` to apply styling with TailwindCSS-inspired utility classes. The project explores user authentication contexts, custom navigation stacks, and drawer screens with dynamic routes.
 
-   ```bash
-   npm install
-   ```
+## Project Structure
 
-2. Start the app
+The app layout is organized to separate the root stack and drawer navigation structures, with nested layouts for tab navigation within specific screens.
 
-   ```bash
-    npx expo start
-   ```
+### Main Components
+- **Root Layout**: The main layout wraps the app in an authentication context (`AuthContextProvider`) and provides gesture support with `react-native-gesture-handler`.
+- **Drawer Navigation**: The drawer includes user profile and settings navigation, as well as routes to specific sections of the app.
+- **Tab Navigation**: Inside the drawer, tabs are used for core app navigation, with screens for the home page, product details, and user profile.
+- **Product Layout**: A detailed view that provides information on individual products.
 
-In the output, you'll find options to open the app in a
+## Key Files and Directories
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+### `src/app/_layout.tsx`
+Sets up the root structure, providing access to the authentication context and defining the main stack navigation with hidden headers and custom status bar configurations.
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+### `src/app/(drawer)/_layout.tsx`
+Defines the drawer navigation layout, which houses the primary user navigation options, such as Profile and Home. It includes a logout option with a confirmation alert.
 
-## Get a fresh project
+### `src/app/(drawer)/(tabs)/_layout.tsx`
+Configures the tab layout nested within the drawer, with icons and listeners to manage user navigation actions, including routes for user profile and authentication.
 
-When you're ready, run:
+### `src/app/(drawer)/(tabs)/product/_layout.tsx`
+Sets up the stack layout for individual product screens, with header configurations hidden for a streamlined UI.
+
+### `src/app/(drawer)/(tabs)/product/[id].tsx`
+Displays the product detail view with rich information including:
+- Product image and description
+- Pricing and payment methods (Pix, cash, credit card options)
+- Action buttons for contacting and navigating back to the main page
+
+## Features
+
+- **User Authentication**: An authentication context (`AuthContext`) manages user login state, providing tailored navigation options based on the user's logged-in status.
+- **Custom Drawer and Tab Navigation**: Tailored drawer and tab navigation, with options to log in/out, access profile information, and manage settings.
+- **Styled with NativeWind**: `nativewind` is used for responsive and streamlined styling, leveraging TailwindCSS-style utility classes.
+- **Gesture and Animation Support**: `react-native-gesture-handler` is utilized for gesture handling within the drawer and tab navigation, enhancing the user experience with fluid animations.
+  
+## Dependencies
+
+- **expo-router**: Simplified file-based navigation structure
+- **nativewind**: Utility-first styling with TailwindCSS-inspired classes
+- **react-native-gesture-handler**: Provides gesture support, especially for drawer interactions
+- **expo**: Core Expo SDK, with modules like `expo-image-picker`, `expo-status-bar`, and `expo-font`
+
+## Installation
+
+To run the project, clone the repository and install the dependencies:
 
 ```bash
-npm run reset-project
+git clone <repository-url>
+cd reactnative-v0-76
+npm install
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+Run the app on your preferred platform (Android, iOS, or Web):
 
-## Learn more
+```bash
+npm start
+```
+This will start the project and you can choose to run it on Android, iOS, or the web from the Expo Developer Tools.
 
-To learn more about developing your project with Expo, look at the following resources:
+## Scripts
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+- `start`: Starts the Expo development environment.
+- `android`, `ios`, `web`: Platform-specific Expo start commands.
+<!-- - `lint`: Lints the code using Expo’s linting rules. -->
+<!-- - `test`: Runs tests with Jest. -->
 
-## Join the community
+## Customization
 
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+To customize the app styling or modify navigation configurations, review the layout files in `src/app/`. NativeWind configurations and gestures can be adjusted in each layout as needed for UI consistency or UX enhancements.
